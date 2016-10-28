@@ -72,6 +72,7 @@ public class InGameManager : MonoBehaviour
     void TimeLimitBegin()
     {
         Debug.Log("TimeLimitBegin");
+
     }
 
     public void OnTimeLimitEnd()

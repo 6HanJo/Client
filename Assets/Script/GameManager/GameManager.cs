@@ -19,6 +19,14 @@ public enum eBossType
     BossC
 }
 
+public enum eBossLevel
+{
+    None,
+    Low,
+    Midium,
+    High
+}
+
 public class GameManager : MonoBehaviour {
     static GameManager instance;
     public static GameManager Instance
@@ -26,9 +34,14 @@ public class GameManager : MonoBehaviour {
         get { return instance; }
     }
 
+    public Scene currentScene;
+
     public int startSceneIdx = 0;
     public eBossType bossType;
+    public eBossLevel bossLevel;
     public eCharType charType;
+
+    CallbackGameEnd end;
 
     void Awake()
     {
@@ -56,6 +69,7 @@ public class GameManager : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        currentScene = scene;
         print(mode);
         switch (scene.name)
         {
@@ -65,13 +79,20 @@ public class GameManager : MonoBehaviour {
                     GameObject.Find("BtnGameStart").GetComponent<Button>().onClick.AddListener(OnBtnGameStartClicked);
                 }
                 break;
-            case "SelectStageScene":
+            case "SelectBossScene":
                 {
                     Debug.Log("SelectStageSceneLoaded");
-                    GameObject.Find("BtnBeginInGame").GetComponent<Button>().onClick.AddListener(OnBtnBeginInGameClicked);
-                    GameObject.Find("BtnBackToTitle").GetComponent<Button>().onClick.AddListener(OnBtnBackToTitleClicked);
 
                     //GameObject.Find("ImgBossA").GetComponent<Button>().onClick.AddListener()
+                    GameObject.Find("BtnLowLevelBoss").GetComponent<Button>().onClick.AddListener(OnBtnLowLevelBoss);
+                    GameObject.Find("BtnMidiumLevelBoss").GetComponent<Button>().onClick.AddListener(OnBtnMidiumLevelBoss);
+                    GameObject.Find("BtnHighLevelBoss").GetComponent<Button>().onClick.AddListener(OnBtnHighLevelBoss);
+                }
+                break;
+            case "SelectCharScene":
+                {
+                    GameObject.Find("BtnBeginInGame").GetComponent<Button>().onClick.AddListener(OnBtnBeginInGameClicked);
+                    GameObject.Find("BtnBackToTitle").GetComponent<Button>().onClick.AddListener(OnBtnBackToTitleClicked);
                 }
                 break;
             default:
@@ -79,19 +100,44 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    //TitleScene
     void OnBtnGameStartClicked()
     {
-        SceneManager.LoadScene("SelectStageScene");
+        SceneManager.LoadScene("SelectBossScene");
     }
 
+    //SelectBossScene
+    void OnBtnLowLevelBoss()
+    {
+        LoadSceneSelectCharScene();
+    }
+
+    void OnBtnMidiumLevelBoss()
+    {
+        LoadSceneSelectCharScene();
+
+    }
+
+    void OnBtnHighLevelBoss()
+    {
+        LoadSceneSelectCharScene();
+
+    }
+
+    void LoadSceneSelectCharScene()
+    {
+        SceneManager.LoadScene("SelectCharScene");
+    }
+
+    //SelectCharScene
     void OnBtnBeginInGameClicked()
     {
-        Debug.Log("StartGame");
+        SceneManager.LoadScene("InGameScene");
     }
 
     void OnBtnBackToTitleClicked()
     {
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("SelectBossScene");
     }
 
 
