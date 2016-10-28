@@ -5,7 +5,6 @@ using PathologicalGames;
 public class SpawnCtrl : MonoBehaviour
 {
     static SpawnPool spawnPool = null;
-    public float delay = 2f;
 
     Transform tr;
 
@@ -25,19 +24,8 @@ public class SpawnCtrl : MonoBehaviour
         spawnPool.Despawn(tr);
     }
 
-    void OnSpawned()
+    void OnBecameInvisible()
     {
-        StartCoroutine(DespawnedObject(delay));
-    }
-
-    IEnumerator DespawnedObject(float delay)
-    {
-        yield return new WaitForSeconds(delay);
         spawnPool.Despawn(tr);
-    }
-
-    void OnDespawned()
-    {
-        //Debug.Log("Despawned " + name);
     }
 }

@@ -15,6 +15,6 @@ public class AimingNwayShooter : MonoBehaviour {
 	void Update () {
 		if (Timer == 0 && canShoot)
 			EnemyLib.instance.ShootPlacedNWay(transform.position, EnemyLib.instance.GetPlayerAngle(transform.position), ShotAngleRange, ShotSpeed, ShotCount, MoveTime, StopTime, bullet);
-		Timer = (Timer + 1) % Interval;
+		//Timer = (Timer + 1) % Interval;
 	}
 }

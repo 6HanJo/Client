@@ -3,8 +3,6 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
-	public static PlayerControl instance;
-
     public static PlayerControl instance;
 
     //이동을 제어합니다.
@@ -25,16 +23,11 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
-<<<<<<< HEAD
-		if (instance == null)
-			instance = this;
-		
-=======
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = this;
         }
 
->>>>>>> ee8113153a8c537cc4227019a9f2177050ef2e8d
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
         //ani = GetComponent<Animator>();
@@ -45,15 +38,33 @@ public class PlayerControl : MonoBehaviour
     {
         if (inputed)
         {
-            h = Input.GetAxis("Horizontal");
-            v = Input.GetAxis("Vertical");
-            if (Input.GetKey(KeyCode.Space))
+            //4방향 키를 기준을 이동합니다.
+            if (Input.GetKey(KeyCode.W))
             {
-                Instantiate(bullet, bulletPos.position, Quaternion.identity);
+                h = 1;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                h = -1;
+            }
+            else {
+                h = 0;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                v = -1; 
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                v = 1;
+            }
+            else {
+                v = 0;
             }
         }
     }
 
+    
     void FixedUpdate()
     {
         if (inputed)
@@ -61,11 +72,11 @@ public class PlayerControl : MonoBehaviour
             Move();
         }
     }
-
+    
 
     void Move()
     {
-        ri.velocity = new Vector2(h * moveSpeed, v * moveSpeed);
+        tr.position += new Vector3(v * moveSpeed * Time.deltaTime ,h * moveSpeed * Time.deltaTime, 0);
     }
 
 

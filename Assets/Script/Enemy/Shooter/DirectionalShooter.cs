@@ -14,6 +14,7 @@ public class DirectionalShooter : MonoBehaviour {
     static SpawnPool spawnPool = null;
 
 
+
     Transform tmp, tr;
     Bullet tBullet;
 
@@ -24,9 +25,11 @@ public class DirectionalShooter : MonoBehaviour {
     }
 
     void Start() {
+        
         if (spawnPool == null) {
             spawnPool = PoolManager.Pools["Test"];
         }
+        
     }
 
 	void Update () {

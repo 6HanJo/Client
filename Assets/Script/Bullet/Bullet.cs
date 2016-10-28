@@ -10,16 +10,24 @@ public class Bullet : MonoBehaviour
 
     float rad;
     Transform tr;
+    Rigidbody2D ri;
+    SpawnCtrl spawn;
 
 
-    void Awake() {
+    void Awake()
+    {
+
         tr = GetComponent<Transform>();
+        ri = GetComponent<Rigidbody2D>();
+
+        //ri.AddForce(new Vector3((speed * Mathf.Cos(rad) * Time.deltaTime), (speed * Mathf.Sin(rad) * Time.deltaTime), 0));
+        
     }
 
     void Update()
     {
         rad = angle * Mathf.PI * 2;
-        tr.position += new Vector3((speed * Mathf.Cos(rad) * Time.deltaTime), (speed * Mathf.Sin(rad) * Time.deltaTime), 0);
+        ri.AddForce(new Vector3((speed * Mathf.Cos(rad)), (speed * Mathf.Sin(rad)), 0));
         angle += angleRate;
         speed += speedRate;
     }
