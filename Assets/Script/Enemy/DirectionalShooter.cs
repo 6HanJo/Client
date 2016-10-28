@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PathologicalGames;
 
 public class DirectionalShooter : MonoBehaviour {
 
@@ -22,4 +23,26 @@ public class DirectionalShooter : MonoBehaviour {
 			tBullet.angle = angle;
 		}
 	}
+
+    IEnumerator SpawnObject()
+    {
+        yield return new WaitForSeconds(shotDelay);
+
+        PoolManager.Pools["Test"].Spawn(bullet, Vector3.zero, Quaternion.identity);
+
+        print(PoolManager.Pools["Test"].name);
+        Transform spawnInstance;
+        SpawnPool spawnPool = PoolManager.Pools["Test"];
+        spawnInstance = spawnPool.Spawn(bullet);
+
+        Bullet tBullet = spawnInstance.GetComponent<Bullet>();
+        spawnInstance.transform.position = transform.position;
+        tBullet.speed = shotSpeed;
+        tBullet.angle = angle;
+
+        
+
+    }
+
+
 }

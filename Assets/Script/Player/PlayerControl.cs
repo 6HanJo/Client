@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerControl : MonoBehaviour
 {
 
+    public static PlayerControl instance;
+
     //이동을 제어합니다.
     public float h, v;
     public bool inputed = true;
@@ -22,6 +24,10 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null) {
+            instance = this;
+        }
+
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
         //ani = GetComponent<Animator>();

@@ -5,18 +5,6 @@ using PathologicalGames;
 public class OPCubeCtrl : MonoBehaviour
 {
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnSpawned()
     {
         Debug.Log("Spawnd " + name);
