@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-	public float angle;
-	public float angleRate;
-	public float speed;
-	public float speedRate;
+	public float angle = 0;
+	public float angleRate = 0;
+	public float speed = 0;
+	public float speedRate = 0;
 
 	void Update () {
 		float rad = angle * Mathf.PI * 2;

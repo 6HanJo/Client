@@ -5,7 +5,7 @@ public class DirectionalShooter : MonoBehaviour {
 
 	public float angle;
 	public float shotSpeed;
-	public float shotDelayTimer;
+	private float shotDelayTimer;
 	public float shotDelay;
 	public bool canShoot = true;
 	public GameObject bullet;
@@ -14,7 +14,12 @@ public class DirectionalShooter : MonoBehaviour {
 		shotDelayTimer += Time.deltaTime;
 
 		if (shotDelayTimer >= shotDelay && canShoot) {
-			Instantiate (bullet);
+			shotDelayTimer = 0;
+			GameObject tmp = Instantiate (bullet) as GameObject;
+			Bullet tBullet = tmp.GetComponent<Bullet> ();
+			tmp.transform.position = transform.position;
+			tBullet.speed = shotSpeed;
+			tBullet.angle = angle;
 		}
-	}	
+	}
 }
