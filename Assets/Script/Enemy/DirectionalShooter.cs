@@ -11,37 +11,35 @@ public class DirectionalShooter : MonoBehaviour {
 	public bool canShoot = true;
 	public GameObject bullet;
 
-	void Update () {
-		shotDelayTimer += Time.deltaTime;
+    static SpawnPool spawnPool = null;
 
-		if (shotDelayTimer >= shotDelay && canShoot) {
-			shotDelayTimer = 0;
-			GameObject tmp = Instantiate (bullet) as GameObject;
-			Bullet tBullet = tmp.GetComponent<Bullet> ();
-			tmp.transform.position = transform.position;
-			tBullet.speed = shotSpeed;
-			tBullet.angle = angle;
+
+    Transform tmp;
+    Bullet tBullet;
+
+    void Start() {
+        if (spawnPool == null) {
+            spawnPool = PoolManager.Pools["Test"];
+        }
+    }
+
+	void Update () {
+
+		if (canShoot) {
+            StartCoroutine("SpawnObject");
 		}
 	}
 
     IEnumerator SpawnObject()
     {
-        yield return new WaitForSeconds(shotDelay);
-
-        PoolManager.Pools["Test"].Spawn(bullet, Vector3.zero, Quaternion.identity);
-
-        print(PoolManager.Pools["Test"].name);
-        Transform spawnInstance;
-        SpawnPool spawnPool = PoolManager.Pools["Test"];
-        spawnInstance = spawnPool.Spawn(bullet);
-
-        Bullet tBullet = spawnInstance.GetComponent<Bullet>();
-        spawnInstance.transform.position = transform.position;
+        canShoot = false;
+        tmp = spawnPool.Spawn(bullet, Vector3.zero, Quaternion.identity);
+        tBullet = tmp.GetComponent<Bullet>();
+        tmp.transform.position = transform.position;
         tBullet.speed = shotSpeed;
         tBullet.angle = angle;
-
-        
-
+        yield return new WaitForSeconds(shotDelay);
+        canShoot = true;
     }
 
 
