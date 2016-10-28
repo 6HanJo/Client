@@ -25,7 +25,10 @@ public class PlayerControl : MonoBehaviour
     {
 		if (instance == null)
 			instance = this;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 59b65c345b83ee98fec2573ecd977030eb76d6db
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
         //ani = GetComponent<Animator>();
