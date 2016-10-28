@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+	public static PlayerControl instance;
 
     public static PlayerControl instance;
 
@@ -24,10 +25,16 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
+<<<<<<< HEAD
+		if (instance == null)
+			instance = this;
+		
+=======
         if (instance == null) {
             instance = this;
         }
 
+>>>>>>> ee8113153a8c537cc4227019a9f2177050ef2e8d
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
         //ani = GetComponent<Animator>();
