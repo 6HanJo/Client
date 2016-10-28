@@ -18,9 +18,7 @@ public class DirectionalShooter : MonoBehaviour {
     Transform tmp, tr;
     Bullet tBullet;
 
-
-
-    void Awake() {
+	void Awake() {
         tr = GetComponent<Transform>();
     }
 
@@ -49,6 +47,4 @@ public class DirectionalShooter : MonoBehaviour {
         yield return new WaitForSeconds(shotDelay);
         canShoot = true;
     }
-
-
 }

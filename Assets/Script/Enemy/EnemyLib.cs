@@ -37,6 +37,7 @@ public class EnemyLib : MonoBehaviour {
 			tBullet.angle = angle + angleRange * ((float)i / (count - 1) - 0.5f);
 			print (tBullet);
 			tBullet.speed = speed;
+			tBullet.InitialSpeed = speed;
 			tBullet.MoveTime = moveTime;
 			tBullet.StopTime = stopTime;
 		}		
