@@ -3,6 +3,7 @@ using System.Collections;
 using PathologicalGames;
 
 public class DataManager : MonoBehaviour {
+
     static DataManager instance;
     public static DataManager Instance
     {
@@ -15,13 +16,8 @@ public class DataManager : MonoBehaviour {
         instance = this;
     }
     
-    // Use this for initialization
     void Start () {
         spawnPool = PoolManager.Pools["Test"];
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

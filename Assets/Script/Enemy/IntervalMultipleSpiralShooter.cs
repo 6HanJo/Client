@@ -14,8 +14,13 @@ public class IntervalMultipleSpiralShooter : MonoBehaviour {
 
 
     static SpawnPool spawnPool = null;
-    Transform tmp;
+    Transform tmp, tr;
     Bullet tBullet;
+
+    void Awake()
+    {
+        tr = GetComponent<Transform>();
+    }
 
     void Start()
     {
@@ -39,7 +44,7 @@ public class IntervalMultipleSpiralShooter : MonoBehaviour {
         {
             tmp = spawnPool.Spawn(bullet, Vector3.zero, Quaternion.identity);
             tBullet = tmp.GetComponent<Bullet>();
-            tmp.transform.position = transform.position;
+            tmp.transform.position = tr.position;
             tBullet.speed = shotSpeed;
             tBullet.angle = shotAngle + (float)i / shotCount;
         }

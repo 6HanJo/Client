@@ -14,8 +14,14 @@ public class DirectionalShooter : MonoBehaviour {
     static SpawnPool spawnPool = null;
 
 
-    Transform tmp;
+    Transform tmp, tr;
     Bullet tBullet;
+
+
+
+    void Awake() {
+        tr = GetComponent<Transform>();
+    }
 
     void Start() {
         if (spawnPool == null) {
@@ -24,7 +30,6 @@ public class DirectionalShooter : MonoBehaviour {
     }
 
 	void Update () {
-
 		if (canShoot) {
             StartCoroutine("SpawnObject");
 		}
@@ -35,7 +40,7 @@ public class DirectionalShooter : MonoBehaviour {
         canShoot = false;
         tmp = spawnPool.Spawn(bullet, Vector3.zero, Quaternion.identity);
         tBullet = tmp.GetComponent<Bullet>();
-        tmp.transform.position = transform.position;
+        tmp.transform.position = tr.position;
         tBullet.speed = shotSpeed;
         tBullet.angle = angle;
         yield return new WaitForSeconds(shotDelay);
