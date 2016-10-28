@@ -14,19 +14,20 @@ public class DirectionalShooter : MonoBehaviour {
     static SpawnPool spawnPool = null;
 
 
+
     Transform tmp, tr;
     Bullet tBullet;
 
-
-
-    void Awake() {
+	void Awake() {
         tr = GetComponent<Transform>();
     }
 
     void Start() {
+        
         if (spawnPool == null) {
             spawnPool = PoolManager.Pools["Test"];
         }
+        
     }
 
 	void Update () {
@@ -46,6 +47,4 @@ public class DirectionalShooter : MonoBehaviour {
         yield return new WaitForSeconds(shotDelay);
         canShoot = true;
     }
-
-
 }

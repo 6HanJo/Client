@@ -15,7 +15,7 @@ public class OvertakingShooter : MonoBehaviour {
 	public GameObject bullet;
 	public bool canShoot = true;
 	void Start () {
-		ShotAngle = EnemyLib.instance.GetPlayerAngle (transform.position);
+ 		ShotAngle = EnemyLib.instance.GetPlayerAngle (transform.position);
 	}
 
 	void Update () {
