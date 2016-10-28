@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PathologicalGames;
 
 public class IntervalMultipleSpiralShooter : MonoBehaviour {
 	public float shotAngle;
@@ -11,23 +12,40 @@ public class IntervalMultipleSpiralShooter : MonoBehaviour {
 	public bool canShoot = false;
 	public GameObject bullet;
 
-	void Update () {
-		shotDelay += Time.deltaTime;
-		if (shotDelayTimer <= shotDelay && canShoot)
-		{
-			shotDelay = 0;
-			shotAngle += shotCount * shotAngleRate;
 
-			for (int i = 0; i < shotCount; i++)
-			{
-				GameObject tmp = Instantiate (bullet) as GameObject;
-				Bullet tBullet = tmp.GetComponent<Bullet> ();
-				tmp.transform.position = transform.position;
-				tBullet.speed = shotSpeed;
-				tBullet.angle = shotAngle + (float)i / shotCount;
-			}
+    static SpawnPool spawnPool = null;
+    Transform tmp;
+    Bullet tBullet;
 
+    void Start()
+    {
+        if (spawnPool == null)
+        {
+            spawnPool = PoolManager.Pools["Test"];
+        }
+    }
 
+    void Update () {
+		if (canShoot) {
+            StartCoroutine("SpawnObject");
 		}
 	}
+
+    IEnumerator SpawnObject()
+    {
+        canShoot = false;
+        shotAngle += shotCount * shotAngleRate;
+        for (int i = 0; i < shotCount; i++)
+        {
+            tmp = spawnPool.Spawn(bullet, Vector3.zero, Quaternion.identity);
+            tBullet = tmp.GetComponent<Bullet>();
+            tmp.transform.position = transform.position;
+            tBullet.speed = shotSpeed;
+            tBullet.angle = shotAngle + (float)i / shotCount;
+        }
+        yield return new WaitForSeconds(shotDelay);
+        canShoot = true;
+    }
+
+
 }
