@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlacedBullet : MonoBehaviour
+public class PlacedBulletPlayer : MonoBehaviour
 {
+    public float basicHP,hp;
 
-    public float basicHP, hp;
     public float InitialSpeed;
     public int MoveTime;
     public int StopTime;
@@ -25,6 +25,7 @@ public class PlacedBullet : MonoBehaviour
         ri = GetComponent<Rigidbody2D>();
         sc = GetComponent<SpawnCtrl>();
     }
+
     void OnEnable()
     {
         hp = basicHP;
@@ -33,8 +34,7 @@ public class PlacedBullet : MonoBehaviour
     public void HpManager(int num)
     {
         hp += num;
-        if (hp < 0)
-        {
+        if (hp < 0) {
             sc.SetActives();
         }
     }
@@ -57,4 +57,14 @@ public class PlacedBullet : MonoBehaviour
         angle += angleRate;
         speed += speedRate;
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag.Contains("Bullet") && (gameObject.tag != col.tag))
+        {
+            col.GetComponent<Bullet>().HpManager(-1);
+            HpManager(-1);
+        }
+    }
+
 }

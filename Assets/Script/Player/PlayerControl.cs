@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+
     public static PlayerControl instance;
 
     //이동을 제어합니다.
@@ -13,9 +14,10 @@ public class PlayerControl : MonoBehaviour
     public float basicSpeed, moveSpeed;
 
     //총알 정보
-    public GameObject bullet;
     public Transform bulletPos;
 
+
+    DirectionalShooter dr;
 
     Transform tr;
     Rigidbody2D ri;
@@ -23,10 +25,13 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
-		if (instance == null)
-			instance = this;
+        if (instance == null)
+            instance = this;
+
+
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
+        dr = GetComponent<DirectionalShooter>();
         //ani = GetComponent<Animator>();
     }
 
@@ -44,24 +49,30 @@ public class PlayerControl : MonoBehaviour
             {
                 h = -1;
             }
-            else {
+            else
+            {
                 h = 0;
             }
             if (Input.GetKey(KeyCode.A))
             {
-                v = -1; 
+                v = -1;
             }
             else if (Input.GetKey(KeyCode.D))
             {
                 v = 1;
             }
-            else {
+            else
+            {
                 v = 0;
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                dr.canShoot = true;
             }
         }
     }
 
-    
+
     void FixedUpdate()
     {
         if (inputed)
@@ -69,11 +80,11 @@ public class PlayerControl : MonoBehaviour
             Move();
         }
     }
-    
+
 
     void Move()
     {
-        tr.position += new Vector3(v * moveSpeed * Time.deltaTime ,h * moveSpeed * Time.deltaTime, 0);
+        tr.position += new Vector3(v * moveSpeed * Time.deltaTime, h * moveSpeed * Time.deltaTime, 0);
     }
 
 

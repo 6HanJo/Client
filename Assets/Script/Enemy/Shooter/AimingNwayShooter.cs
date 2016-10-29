@@ -12,9 +12,16 @@ public class AimingNwayShooter : MonoBehaviour {
 	public bool canShoot = true;
 	public GameObject bullet;
 
-	void Update () {
+    Transform tr;
+
+    void Awake()
+    {
+        tr = GetComponent<Transform>();
+    }
+
+    void Update () {
 		if (Timer == 0 && canShoot)
-			EnemyLib.instance.ShootPlacedNWay(transform.position, EnemyLib.instance.GetPlayerAngle(transform.position), ShotAngleRange, ShotSpeed, ShotCount, MoveTime, StopTime, bullet);
-		//Timer = (Timer + 1) % Interval;
+			EnemyLib.instance.ShootPlacedNWay(tr.position, EnemyLib.instance.GetPlayerAngle(transform.position), ShotAngleRange, ShotSpeed, ShotCount, MoveTime, StopTime, bullet);
+		Timer = (Timer + 1) % Interval;
 	}
 }

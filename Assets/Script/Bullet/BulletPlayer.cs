@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlacedBullet : MonoBehaviour
+public class BulletPlayer : MonoBehaviour
 {
-
     public float basicHP, hp;
-    public float InitialSpeed;
-    public int MoveTime;
-    public int StopTime;
-    public int Timer;
     public float angle = 0;
     public float angleRate = 0;
     public float speed = 0;
     public float speedRate = 0;
 
-
+    float rad;
     Transform tr;
     Rigidbody2D ri;
     SpawnCtrl sc;
+
+
 
     void Awake()
     {
@@ -29,10 +26,10 @@ public class PlacedBullet : MonoBehaviour
     {
         hp = basicHP;
     }
-
     public void HpManager(int num)
     {
         hp += num;
+
         if (hp < 0)
         {
             sc.SetActives();
@@ -41,20 +38,20 @@ public class PlacedBullet : MonoBehaviour
 
     void Update()
     {
-        if (Timer == MoveTime)
-            speed = 0;
-
-        if (Timer == MoveTime + StopTime)
-            speed = InitialSpeed;
-
-        Timer++;
-
-        float rad = angle * Mathf.PI * 2;
-
-        tr.position += new Vector3((speed * Mathf.Cos(rad) * Time.deltaTime), speed * Mathf.Sin(rad) * Time.deltaTime, 0);
-        //ri.AddForce(new Vector3(speed * Mathf.Cos(rad) * Time.deltaTime, speed * Mathf.Sin(rad) * Time.deltaTime,0));
-
+        rad = angle * Mathf.PI * 2;
+        //ri.AddForce(new Vector3((speed * Mathf.Cos(rad)), (speed * Mathf.Sin(rad)), 0));
+        tr.position += new Vector3((speed * Mathf.Cos(rad) * Time.deltaTime), (speed * Mathf.Sin(rad) * Time.deltaTime), 0);
         angle += angleRate;
         speed += speedRate;
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag.Contains("Bullet") && (gameObject.tag != col.tag))
+        {
+            col.GetComponent<Bullet>().HpManager(-1);
+            HpManager(-1);
+        }
+    }
+
 }

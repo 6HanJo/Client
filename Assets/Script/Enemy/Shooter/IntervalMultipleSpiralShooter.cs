@@ -8,7 +8,7 @@ public class IntervalMultipleSpiralShooter : MonoBehaviour {
 	public float shotSpeed;
 	public float shotDelay;
 	public int shotCount;
-	public bool canShoot = false;
+	public bool canShoot = true;
 	public GameObject bullet;
 
 
@@ -26,25 +26,27 @@ public class IntervalMultipleSpiralShooter : MonoBehaviour {
 		if (spawnPool == null) {
 			spawnPool = PoolManager.Pools ["Test"];
 		}
-		if (canShoot) {
-			StartCoroutine ("SpawnObject");
-		}
+		StartCoroutine ("SpawnObject");
 	}
 
     IEnumerator SpawnObject()
 	{
 		while (true) {
-			canShoot = false;
-			shotAngle += shotCount * shotAngleRate;
-			for (int i = 0; i < shotCount; i++) {
-				tmp = spawnPool.Spawn (bullet, Vector3.zero, Quaternion.identity);
-				tBullet = tmp.GetComponent<Bullet> ();
-				tmp.transform.position = tr.position;
-				tBullet.speed = shotSpeed;
-				tBullet.angle = shotAngle + (float)i / shotCount;
+			if (canShoot) {
+				if (shotAngle >= 1)
+					shotAngle = 0;
+				shotAngle += shotCount * shotAngleRate;
+				for (int i = 0; i < shotCount; i++) {
+					tmp = spawnPool.Spawn (bullet, Vector3.zero, Quaternion.identity);
+					tBullet = tmp.GetComponent<Bullet> ();
+					tmp.transform.position = tr.position;
+					tBullet.speed = shotSpeed;
+					tBullet.angle = shotAngle + (float)i / shotCount;
+					tBullet.speedRate = 0;
+					tBullet.angleRate = 0;
+				}
 			}
 			yield return new WaitForSeconds (shotDelay);
-			canShoot = true;
 		}
 	}
 }

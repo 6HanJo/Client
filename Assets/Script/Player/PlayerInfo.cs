@@ -8,7 +8,6 @@ public class PlayerInfo : MonoBehaviour
     void HpManager(float num)
     {
         hp += num;
-        print(hp);
     }
 
 

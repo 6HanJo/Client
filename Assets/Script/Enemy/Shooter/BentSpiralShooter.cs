@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PathologicalGames;
 
 public class BentSpiralShooter : MonoBehaviour {
 	public float ShotAngle;
@@ -13,14 +14,31 @@ public class BentSpiralShooter : MonoBehaviour {
 	public bool canShoot = true;
 	public GameObject bullet;
 
-	void Update () {
+    static SpawnPool spawnPool = null;
+    Transform tmp, tr;
+    Bullet tBullet;
+
+    void Awake()
+    {
+        tr = GetComponent<Transform>();
+    }
+
+    void Start()
+    {
+        if (spawnPool == null)
+        {
+            spawnPool = PoolManager.Pools["Test"];
+        }
+    }
+
+    void Update () {
 		if (Timer == 0 && canShoot)
 		{
 			for (int i = 0; i < ShotCount; i++)
 			{
-				GameObject tmp = Instantiate (bullet) as GameObject;
-				Bullet tBullet = tmp.GetComponent<Bullet> ();
-				tmp.transform.position = transform.position;
+				tmp = spawnPool.Spawn(bullet);
+				tBullet = tmp.GetComponent<Bullet> ();
+				tmp.transform.position = tr.position;
 				tBullet.speed = ShotSpeed;
 				tBullet.angle = ShotAngle + (float)i / ShotCount;
 				tBullet.angleRate = BulletAngleRate;
