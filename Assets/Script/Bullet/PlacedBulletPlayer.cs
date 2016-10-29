@@ -16,13 +16,11 @@ public class PlacedBulletPlayer : MonoBehaviour
 
 
     Transform tr;
-    Rigidbody2D ri;
     SpawnCtrl sc;
 
     void Awake()
     {
         tr = GetComponent<Transform>();
-        ri = GetComponent<Rigidbody2D>();
         sc = GetComponent<SpawnCtrl>();
     }
 
@@ -31,12 +29,16 @@ public class PlacedBulletPlayer : MonoBehaviour
         hp = basicHP;
     }
 
-    public void HpManager(int num)
+    public void HpManager(float num)
     {
         hp += num;
-        if (hp < 0) {
+        if (hp <= 0)
+        {
             sc.SetActives();
         }
+        float percent = (hp / basicHP) * 100;
+        tr.localScale = new Vector3(1 * percent / 100, 1 * percent / 100, 1);
+
     }
 
     void Update()
@@ -52,7 +54,6 @@ public class PlacedBulletPlayer : MonoBehaviour
         float rad = angle * Mathf.PI * 2;
 
         tr.position += new Vector3((speed * Mathf.Cos(rad) * Time.deltaTime), speed * Mathf.Sin(rad) * Time.deltaTime, 0);
-        //ri.AddForce(new Vector3(speed * Mathf.Cos(rad) * Time.deltaTime, speed * Mathf.Sin(rad) * Time.deltaTime,0));
 
         angle += angleRate;
         speed += speedRate;
@@ -62,8 +63,11 @@ public class PlacedBulletPlayer : MonoBehaviour
     {
         if (col.tag.Contains("Bullet") && (gameObject.tag != col.tag))
         {
-            col.GetComponent<Bullet>().HpManager(-1);
-            HpManager(-1);
+            if (col.GetComponent<Bullet>() == null)
+                col.GetComponent<PlacedBullet>().HpManager(-hp);
+            else
+                col.GetComponent<Bullet>().HpManager(-hp);
+            HpManager(-hp);
         }
     }
 

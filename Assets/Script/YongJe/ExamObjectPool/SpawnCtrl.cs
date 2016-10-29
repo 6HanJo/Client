@@ -21,14 +21,24 @@ public class SpawnCtrl : MonoBehaviour
         }
     }
 
+    void OnSpawned() {
+
+        tr.localScale = new Vector3(1, 1, 1);
+    }
+
     public void SetActives()
     {
         spawnPool.Despawn(tr);
+        tr.localScale = new Vector3(1, 1, 1);
     }
 
     void OnBecameInvisible()
     {
         if (gameObject.activeSelf)
+        {
             spawnPool.Despawn(tr);
+            tr.localScale = new Vector3(1, 1, 1);
+        }
     }
+
 }
