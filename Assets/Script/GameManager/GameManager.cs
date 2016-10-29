@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public enum eCharType
 {
-    None,
+    None = -1,
     CharA,
     CharB,
     CharC
@@ -13,7 +13,7 @@ public enum eCharType
 
 public enum eBossType
 {
-    None,
+    None = -1,
     BossA,
     BossB,
     BossC
@@ -21,7 +21,7 @@ public enum eBossType
 
 public enum eBossLevel
 {
-    None,
+    None = -1,
     Low,
     Midium,
     High
@@ -41,7 +41,13 @@ public class GameManager : MonoBehaviour {
     public eBossLevel bossLevel;
     public eCharType charType;
 
-    CallbackGameEnd end;
+    //SelectBossScene
+    Button[] arrBtnBoss;
+    Button[] arrBtnLevel;
+
+    //SelectCharScene
+    Button[] arrBtnChar;
+    Button btnBeginInGame;
 
     void Awake()
     {
@@ -58,12 +64,24 @@ public class GameManager : MonoBehaviour {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(startSceneIdx);
 
+        //SelectBossScene
+        arrBtnBoss = new Button[3];
+        arrBtnLevel = new Button[3];
+
+        //SelectCharScene
+        arrBtnChar = new Button[3];
+
         Init();
     }
 
     void Init()
     {
+        for (int i = 0; i < 3; i++)
+        {
+            arrBtnLevel[i] = null;
+        }
         bossType = eBossType.None;
+        bossLevel = eBossLevel.None;
         charType = eCharType.None;
     }
 
@@ -81,18 +99,45 @@ public class GameManager : MonoBehaviour {
                 break;
             case "SelectBossScene":
                 {
-                    Debug.Log("SelectStageSceneLoaded");
+                    Debug.Log("SelectBossSceneLoaded");
 
                     //GameObject.Find("ImgBossA").GetComponent<Button>().onClick.AddListener()
-                    GameObject.Find("BtnLowLevelBoss").GetComponent<Button>().onClick.AddListener(OnBtnLowLevelBoss);
-                    GameObject.Find("BtnMidiumLevelBoss").GetComponent<Button>().onClick.AddListener(OnBtnMidiumLevelBoss);
-                    GameObject.Find("BtnHighLevelBoss").GetComponent<Button>().onClick.AddListener(OnBtnHighLevelBoss);
+                    bossType = eBossType.None;
+
+                    arrBtnBoss[(int)eBossType.BossA] = GameObject.Find("BtnBossA").GetComponent<Button>();
+                    arrBtnBoss[(int)eBossType.BossB] = GameObject.Find("BtnBossB").GetComponent<Button>();
+                    arrBtnBoss[(int)eBossType.BossC] = GameObject.Find("BtnBossC").GetComponent<Button>();
+
+                    arrBtnBoss[(int)eBossType.BossA].onClick.AddListener(OnBtnBossAClicked);
+                    arrBtnBoss[(int)eBossType.BossB].onClick.AddListener(OnBtnBossBClicked);
+                    arrBtnBoss[(int)eBossType.BossC].onClick.AddListener(OnBtnBossCClicked);
+
+                    arrBtnLevel[(int)eBossLevel.Low] = GameObject.Find("BtnLowLevelBoss").GetComponent<Button>();
+                    arrBtnLevel[(int)eBossLevel.Midium] = GameObject.Find("BtnMidiumLevelBoss").GetComponent<Button>();
+                    arrBtnLevel[(int)eBossLevel.High] = GameObject.Find("BtnHighLevelBoss").GetComponent<Button>();
+
+                    arrBtnLevel[(int)eBossLevel.Low].onClick.AddListener(OnBtnLowLevelBossClicked);
+                    arrBtnLevel[(int)eBossLevel.Midium].onClick.AddListener(OnBtnMidiumLevelBossClicked);
+                    arrBtnLevel[(int)eBossLevel.High].onClick.AddListener(OnBtnHighLevelBossClicked);
                 }
                 break;
             case "SelectCharScene":
                 {
-                    GameObject.Find("BtnBeginInGame").GetComponent<Button>().onClick.AddListener(OnBtnBeginInGameClicked);
+                    Debug.Log("SelectCharSceneLoaded");
+
+                    charType = eCharType.None;
+                    btnBeginInGame = GameObject.Find("BtnBeginInGame").GetComponent<Button>();
+
+                    btnBeginInGame.onClick.AddListener(OnBtnBeginInGameClicked);
                     GameObject.Find("BtnBackToTitle").GetComponent<Button>().onClick.AddListener(OnBtnBackToTitleClicked);
+
+                    arrBtnChar[(int)eCharType.CharA] = GameObject.Find("BtnCharA").GetComponent<Button>();
+                    arrBtnChar[(int)eCharType.CharB] = GameObject.Find("BtnCharB").GetComponent<Button>();
+                    arrBtnChar[(int)eCharType.CharC] = GameObject.Find("BtnCharC").GetComponent<Button>();
+                    
+                    arrBtnChar[(int)eCharType.CharA].onClick.AddListener(OnBtnCharAClicked);
+                    arrBtnChar[(int)eCharType.CharB].onClick.AddListener(OnBtnCharBClicked);
+                    arrBtnChar[(int)eCharType.CharC].onClick.AddListener(OnBtnCharCClicked);
                 }
                 break;
             default:
@@ -106,22 +151,52 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene("SelectBossScene");
     }
 
+    void OnBtnBossAClicked()
+    {
+        LevelButtonInteractable(eBossType.BossA);
+        bossType = eBossType.BossA;
+    }
+
+    void OnBtnBossBClicked()
+    {
+        LevelButtonInteractable(eBossType.BossB);
+        bossType = eBossType.BossB;
+    }
+
+    void OnBtnBossCClicked()
+    {
+        LevelButtonInteractable(eBossType.BossC);
+        bossType = eBossType.BossC;
+    }
+
+    void LevelButtonInteractable(eBossType type)
+    {
+        if (bossType == type)
+            return;
+        for (int i = 0; i < 3; i++)
+        {
+            arrBtnLevel[i].interactable = true;
+        }
+        GameObject.Find("ImgSelector").transform.position = arrBtnBoss[(int)type].transform.position;
+    }
+
     //SelectBossScene
-    void OnBtnLowLevelBoss()
+    void OnBtnLowLevelBossClicked()
     {
         LoadSceneSelectCharScene();
+        bossLevel = eBossLevel.Low;
     }
 
-    void OnBtnMidiumLevelBoss()
+    void OnBtnMidiumLevelBossClicked()
     {
         LoadSceneSelectCharScene();
-
+        bossLevel = eBossLevel.Midium;
     }
 
-    void OnBtnHighLevelBoss()
+    void OnBtnHighLevelBossClicked()
     {
         LoadSceneSelectCharScene();
-
+        bossLevel = eBossLevel.High;
     }
 
     void LoadSceneSelectCharScene()
@@ -130,8 +205,38 @@ public class GameManager : MonoBehaviour {
     }
 
     //SelectCharScene
+    void OnBtnCharAClicked()
+    {
+        CharButtonInteractable(eCharType.CharA);
+        charType = eCharType.CharA;
+    }
+
+    void OnBtnCharBClicked()
+    {
+        CharButtonInteractable(eCharType.CharB);
+        charType = eCharType.CharB;
+    }
+
+    void OnBtnCharCClicked()
+    {
+        CharButtonInteractable(eCharType.CharC);
+        charType = eCharType.CharC;
+    }
+
+    void CharButtonInteractable(eCharType type)
+    {
+        if (charType == type)
+            return;
+
+        btnBeginInGame.interactable = true;
+        GameObject.Find("ImgSelector").transform.position = arrBtnChar[(int)type].transform.position;
+    }
+
     void OnBtnBeginInGameClicked()
     {
+        Debug.Log("BossType : " + bossType);
+        Debug.Log("BossLevel : " + bossLevel);
+        Debug.Log("Character Type : " + charType);
         SceneManager.LoadScene("InGameScene");
     }
 
