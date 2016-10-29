@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 //공격력 사거리 재장전
-public class Skill6LaserRotation : MonoBehaviour
+public class Skill6LaserRotation : MonoBehaviour, ISkill
 {
 
     public status skillset;

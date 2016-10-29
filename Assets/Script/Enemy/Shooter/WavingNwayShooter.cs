@@ -12,7 +12,8 @@ public class WavingNwayShooter : MonoBehaviour {
 	private int Timer;
 	public bool canShoot = true;
 	public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
     Transform tr;
 
     void Awake()
@@ -27,7 +28,7 @@ public class WavingNwayShooter : MonoBehaviour {
 			EnemyLib.instance.ShootNWay(
 				tr.position, 
 				ShotAngle + WavingAngleRange * Mathf.Sin(Mathf.PI * 2 * Timer / Cycle), 
-				ShotAngleRange, ShotSpeed, ShotCount, 0, 0, bullet);
+				ShotAngleRange, ShotSpeed, ShotCount, 0, 0, bullet, bulletMoney, bulletHp);
 		}
 		if (canShoot)
 			Timer = (Timer + 1) % Cycle;

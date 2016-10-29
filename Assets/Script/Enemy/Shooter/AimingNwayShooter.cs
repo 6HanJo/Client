@@ -11,7 +11,8 @@ public class AimingNwayShooter : MonoBehaviour {
 	public int StopTime;
 	public bool canShoot = true;
 	public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
     Transform tr;
 
     void Awake()
@@ -21,7 +22,7 @@ public class AimingNwayShooter : MonoBehaviour {
 
     void Update () {
 		if (Timer == 0 && canShoot)
-			EnemyLib.instance.ShootPlacedNWay(tr.position, EnemyLib.instance.GetPlayerAngle(transform.position), ShotAngleRange, ShotSpeed, ShotCount, MoveTime, StopTime, bullet);
+			EnemyLib.instance.ShootPlacedNWay(tr.position, EnemyLib.instance.GetPlayerAngle(transform.position), ShotAngleRange, ShotSpeed, ShotCount, MoveTime, StopTime, bullet, bulletMoney, bulletHp);
 		Timer = (Timer + 1) % Interval;
 	}
 }

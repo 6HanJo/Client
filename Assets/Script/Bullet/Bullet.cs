@@ -4,6 +4,7 @@ using System.Collections;
 public class Bullet : MonoBehaviour
 {
     public float basicHP, hp;
+	public float money;
     public float angle = 0;
     public float angleRate = 0;
     public float speed = 0;

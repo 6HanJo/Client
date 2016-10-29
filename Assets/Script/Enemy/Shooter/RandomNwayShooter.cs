@@ -11,7 +11,8 @@ public class RandomNwayShooter : MonoBehaviour
     private int Timer;
     public GameObject bullet;
     public bool canShoot = true;
-
+	public float bulletMoney;
+	public float bulletHp;
     static SpawnPool spawnPool = null;
     Transform tmp, tr;
     Bullet tBullet;
@@ -43,7 +44,10 @@ public class RandomNwayShooter : MonoBehaviour
 				tBullet.speedRate = 0;
 				tBullet.angleRate = 0;
 				tBullet.angle = EnemyLib.instance.GetPlayerAngle(transform.position) + ShotAngleRange * (Random.Range(0.0f, 1.0f) - 0.5f);
-            }
+				tBullet.basicHP = bulletHp;
+				tBullet.hp = bulletHp;
+				tBullet.money = bulletMoney;
+			}
         }
         if (canShoot)
             Timer = (Timer + 1) % Interval;

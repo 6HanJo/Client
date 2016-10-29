@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Skill1ShoutingOut : MonoBehaviour {
+public class Skill1ShoutingOut : MonoBehaviour, ISkill {
 
     public status skillset;
     public float ShoutDelay;
