@@ -47,14 +47,16 @@ public class BulletPlayer : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag.Contains("Bullet") && (gameObject.tag != col.tag))
-        {
-            if (col.GetComponent<Bullet>() == null)
-                col.GetComponent<PlacedBullet>().HpManager(-hp);
-            else
-                col.GetComponent<Bullet>().HpManager(-hp);
-            HpManager(-hp);
-        }
+		if (col.tag.Contains ("Bullet") && (gameObject.tag != col.tag)) {
+			if (col.GetComponent<Bullet> () == null)
+				col.GetComponent<PlacedBullet> ().HpManager (-hp);
+			else
+				col.GetComponent<Bullet> ().HpManager (-hp);
+			HpManager (-hp);
+		} else if (col.CompareTag ("Boss")) {
+			col.GetComponent<BossInfo> ().HpManager(-hp);
+
+		}
     }
 
 }
