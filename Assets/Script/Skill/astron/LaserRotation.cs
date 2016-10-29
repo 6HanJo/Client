@@ -12,6 +12,8 @@ public class LaserRotation : MonoBehaviour
     public int machineCnt;
     public List<GameObject> machineList;
 
+
+
     public GameObject machine;
 
     GameObject tmp;
@@ -23,7 +25,17 @@ public class LaserRotation : MonoBehaviour
         UseSkill();
     }
 
-
+    public void SetSkill(float hp, float length, float reload, float movSpeed, float minRot, float maxRot, float waitTime, float standTime, int machineCnt) {
+        skillset.damage = hp;
+        skillset.distance = length;
+        skillset.reload = reload;
+        this.movSpeed = movSpeed;
+        this.minRot = minRot;
+        this.maxRot = maxRot;
+        this.waitTime = waitTime;
+        this.standTime = standTime;
+        this.machineCnt = machineCnt;
+    }
 
     public void UseSkill()
     {

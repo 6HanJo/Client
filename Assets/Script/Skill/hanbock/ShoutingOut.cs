@@ -14,6 +14,14 @@ public class ShoutingOut : MonoBehaviour {
         UseSkill();
     }
 
+    public void SetSkill(float damage, float range, float reload, float ShoutDelay)
+    {
+        skillset.damage = damage;
+        skillset.distance = range;
+        skillset.reload = reload;
+        this.ShoutDelay = ShoutDelay;
+    }
+
     public void UseSkill()
     {
         StartCoroutine("Shout");

@@ -20,7 +20,15 @@ public class PlazmaMaker : MonoBehaviour
         UseSkill();
     }
 
-
+    public void SetSkill(float hp, float length, float reload, float rotSpeed, float waitTime, float standTime)
+    {
+        skillset.damage = hp;
+        skillset.distance = length;
+        skillset.reload = reload;
+        this.rotSpeed = rotSpeed;
+        this.waitTime = waitTime;
+        this.standTime = standTime;
+    }
 
     public void UseSkill()
     {

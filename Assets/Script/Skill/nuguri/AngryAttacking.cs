@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AngryAttack : MonoBehaviour {
+public class AngryAttacking : MonoBehaviour {
 
     public status skillset;
     public float shotCnt, intervalTime, shotIntervalTime, bulletSpeed;
@@ -12,6 +12,17 @@ public class AngryAttack : MonoBehaviour {
     {
         StartCoroutine("Delay");
         UseSkill();
+    }
+
+    public void SetSkill(float damage, float reload, float bulletCnt, float bulletStandTime, float bulletSpeed, float skillIntervalTime, float shotIntervalTime)
+    {
+        skillset.damage = damage;
+        skillset.distance = bulletStandTime;
+        skillset.reload = reload;
+        this.shotCnt = bulletCnt;
+        this.intervalTime = skillIntervalTime;
+        this.shotIntervalTime = shotIntervalTime;
+        this.bulletSpeed = bulletSpeed;
     }
 
     public void UseSkill()

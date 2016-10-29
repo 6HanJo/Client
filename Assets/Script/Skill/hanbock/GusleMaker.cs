@@ -17,6 +17,16 @@ public class GusleMaker : MonoBehaviour {
         UseSkill();
     }
 
+    public void SetSkill(float damage, float range, float reload, float movSpeed, float waitTime, float standTime)
+    {
+        skillset.damage = damage;
+        skillset.distance = range;
+        skillset.reload = reload;
+        this.movSpeed = movSpeed;
+        this.waitTime = waitTime;
+        this.standTime = standTime;
+    }
+
     public void UseSkill()
     {
         for (int i = 0; i < 2; i++) {
