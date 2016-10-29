@@ -9,12 +9,8 @@ public class Boss1 : MonoBehaviour {
 	public Sprite Normal;
 	public Sprite Red;
 	SpriteRenderer sR;
-<<<<<<< HEAD
 	bool isNormal;
 
-=======
-	bool isNormal = true;
->>>>>>> 6e11f3834182d1716c7ba032df3620d5cebd737e
 	void Awake()
 	{
 		sR = GetComponent<SpriteRenderer> ();
@@ -41,11 +37,7 @@ public class Boss1 : MonoBehaviour {
 		}
 	}
 	void Start () {
-<<<<<<< HEAD
-		//LevelUp ();
-=======
 		StartCoroutine (TrensformManage ());
->>>>>>> 6e11f3834182d1716c7ba032df3620d5cebd737e
 	}
 
 	IEnumerator TrensformManage() {

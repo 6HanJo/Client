@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlacedBulletPlayer : MonoBehaviour
 {
+    public float basicHP,hp;
+
     public float InitialSpeed;
     public int MoveTime;
     public int StopTime;
@@ -15,12 +17,26 @@ public class PlacedBulletPlayer : MonoBehaviour
 
     Transform tr;
     Rigidbody2D ri;
-
+    SpawnCtrl sc;
 
     void Awake()
     {
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
+        sc = GetComponent<SpawnCtrl>();
+    }
+
+    void OnEnable()
+    {
+        hp = basicHP;
+    }
+
+    public void HpManager(int num)
+    {
+        hp += num;
+        if (hp < 0) {
+            sc.SetActives();
+        }
     }
 
     void Update()
@@ -46,8 +62,8 @@ public class PlacedBulletPlayer : MonoBehaviour
     {
         if (col.tag.Contains("Bullet") && (gameObject.tag != col.tag))
         {
-            col.GetComponent<SpawnCtrl>().SetActives();
-            gameObject.GetComponent<SpawnCtrl>().SetActives();
+            col.GetComponent<Bullet>().HpManager(-1);
+            HpManager(-1);
         }
     }
 

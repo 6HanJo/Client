@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlacedBullet : MonoBehaviour
 {
+
+    public float basicHP, hp;
     public float InitialSpeed;
     public int MoveTime;
     public int StopTime;
@@ -15,12 +17,26 @@ public class PlacedBullet : MonoBehaviour
 
     Transform tr;
     Rigidbody2D ri;
-
+    SpawnCtrl sc;
 
     void Awake()
     {
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
+        sc = GetComponent<SpawnCtrl>();
+    }
+    void OnEnable()
+    {
+        hp = basicHP;
+    }
+
+    public void HpManager(int num)
+    {
+        hp += num;
+        if (hp < 0)
+        {
+            sc.SetActives();
+        }
     }
 
     void Update()
