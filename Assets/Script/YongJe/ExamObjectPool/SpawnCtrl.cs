@@ -21,14 +21,33 @@ public class SpawnCtrl : MonoBehaviour
         }
     }
 
+    public void SetTimeDespawn(float time) {
+        StartCoroutine("Delay", time);
+    }
+
+    void OnSpawned()
+    {
+        tr.localScale = new Vector3(1, 1, 1);
+    }
+
     public void SetActives()
     {
         spawnPool.Despawn(tr);
+        tr.localScale = new Vector3(1, 1, 1);
     }
 
     void OnBecameInvisible()
     {
         if (gameObject.activeSelf)
+        {
             spawnPool.Despawn(tr);
+            tr.localScale = new Vector3(1, 1, 1);
+        }
     }
+
+    IEnumerator Delay(float time) {
+        yield return new WaitForSeconds(time);
+        SetActives();
+    }
+
 }

@@ -11,7 +11,9 @@ public class DirectionalShooter : MonoBehaviour {
 	public bool canShoot = true;
 	public GameObject bullet;
 
-    public bool isPlayer = false, playerShoot = false;
+    public bool isPlayer = false, playerShoot = false, skill = false;
+
+    public float bulletDmg, bulletCnt, bulletStandTime;
 
     static SpawnPool spawnPool = null;
     Transform tmp, tr;
@@ -29,13 +31,21 @@ public class DirectionalShooter : MonoBehaviour {
         }
     }
 
-	void Update () {
-        if (canShoot && !isPlayer) {
+	void Update ()
+    {
+         if (skill && canShoot)
+        {
+            StartCoroutine("SpawnObject3");
+        }
+        else if(canShoot && !isPlayer)
+        {
             StartCoroutine("SpawnObject");
         }
-        else if (canShoot && isPlayer && !playerShoot) {
+        else if (canShoot && isPlayer && !playerShoot)
+        {
             StartCoroutine("SpawnObject2");
         }
+        
 	}
 
     IEnumerator SpawnObject()
@@ -61,6 +71,23 @@ public class DirectionalShooter : MonoBehaviour {
         pBullet.angle = angle;
         yield return new WaitForSeconds(shotDelay);
         playerShoot = false;
+    }
+
+    IEnumerator SpawnObject3()
+    {
+        canShoot = false;
+        skill = false;
+        for (int i = 0; i < bulletCnt; i++) {
+            tmp = spawnPool.Spawn(bullet, transform.position, Quaternion.identity);
+            pBullet = tmp.GetComponent<BulletPlayer>();
+            tmp.transform.position = transform.position;
+            pBullet.speed = shotSpeed;
+            pBullet.angle = angle;
+            pBullet.basicHP = bulletDmg;
+            pBullet.GetComponent<SpawnCtrl>().SetTimeDespawn(bulletStandTime);
+            yield return new WaitForSeconds(shotDelay);
+        }
+        gameObject.SetActive(false);
     }
 
 
