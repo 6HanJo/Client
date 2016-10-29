@@ -44,9 +44,10 @@ public class PlacedBullet : MonoBehaviour
         if (Timer == MoveTime)
             speed = 0;
 
-        if (Timer == MoveTime + StopTime)
-            speed = InitialSpeed;
-
+		if (Timer == MoveTime + StopTime) {
+			//print ("출발");
+			speed = InitialSpeed;
+		}
         Timer++;
 
         float rad = angle * Mathf.PI * 2;

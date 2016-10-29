@@ -6,10 +6,18 @@ public class Boss1 : MonoBehaviour {
 	IntervalMultipleSpiralShooter interMul;
 	RandomSpreadingShooter randSpreading;
 	BentSpiralShooter[] bentSpiral = new BentSpiralShooter[2];
+	PlacedMultipleSpiralShooter placedMul;
+	OvertakingShooter overTaking;
+
 	public Sprite Normal;
 	public Sprite Red;
 	SpriteRenderer sR;
+<<<<<<< HEAD
+	bool isNormal = true;
+	int patternCount = 0;
+=======
 	bool isNormal;
+>>>>>>> b1b4da6d50ad6312b6a896d395a2b274e7ac5c86
 
 	void Awake()
 	{
@@ -17,22 +25,26 @@ public class Boss1 : MonoBehaviour {
 		interMul = GetComponent<IntervalMultipleSpiralShooter> ();
 		randSpreading = GetComponent<RandomSpreadingShooter> ();
 		bentSpiral = GetComponents<BentSpiralShooter> ();
+		overTaking = GetComponent<OvertakingShooter> ();
+		placedMul = GetComponent<PlacedMultipleSpiralShooter> ();
 	}
 
 	void LevelUp()
 	{
-		if (isNormal) {
+		if (isNormal && patternCount == 0) {
 			interMul.shotCount++;
 			randSpreading.ShotCount += 10;
+		} else if (isNormal && patternCount == 1) {
+			overTaking.GroupCount++;
 		} else {
 			for(int i = 0; i < 2; i++)
 			{
-				bentSpiral [i].ShotCount += 4;
+				bentSpiral [i].ShotCount += 2;
 				if(i == 0)
-					bentSpiral [i].BulletAngleRate += 0.001f;
+					bentSpiral [i].BulletAngleRate += 0.0005f;
 				else 
-					bentSpiral [i].BulletAngleRate -= 0.001f;
-				bentSpiral [i].BulletSpeedRate += bentSpiral [i].BulletSpeedRate;
+					bentSpiral [i].BulletAngleRate -= 0.0005f;
+				bentSpiral [i].BulletSpeedRate += 0.005f;
 			}
 		}
 	}
@@ -43,17 +55,22 @@ public class Boss1 : MonoBehaviour {
 	IEnumerator TrensformManage() {
 		while(true)
 		{
-			yield return new WaitForSeconds(30);
-			if (isNormal) {
-				print ("Red");
+			yield return new WaitForSeconds(15);
+			if (isNormal && patternCount == 0) {
+				placedMul.canShoot = true;
+				overTaking.canShoot = true;
+				interMul.canShoot = false;
+				randSpreading.canShoot = false;
+
+			} else if (isNormal && patternCount == 1) {
 				isNormal = false;
 				sR.sprite = Red;
 				bentSpiral [0].canShoot = true;
 				bentSpiral [1].canShoot = true;
-				interMul.canShoot = false;
-				randSpreading.canShoot = false;
-			} else {
-				print ("Noraml");
+				placedMul.canShoot = false;
+				overTaking.canShoot = false;
+			}
+			else {
 				isNormal = true;
 				sR.sprite = Normal;
 				bentSpiral [0].canShoot = false;
@@ -62,6 +79,9 @@ public class Boss1 : MonoBehaviour {
 				randSpreading.canShoot = true;
 			}
 			LevelUp ();
+			patternCount++;
+			if (patternCount >= 3)
+				patternCount = 0;
 		}
 	}
 

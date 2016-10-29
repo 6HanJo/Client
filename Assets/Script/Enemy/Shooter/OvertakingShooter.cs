@@ -37,6 +37,9 @@ public class OvertakingShooter : MonoBehaviour {
 					tr.position,ShotAngle + GroupAngle * i, ShotAngleRange,
 					ShotSpeed + GroupSpeed * i, ShotCount, 0, 0, bullet);
 			}
+			if (i > GroupCount) {
+				GroupAngle *= -1;
+			}
 			Timer = (Timer + 1) % Interval;
 		}
 		else 
