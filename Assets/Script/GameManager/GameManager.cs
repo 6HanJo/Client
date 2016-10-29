@@ -260,10 +260,10 @@ public class GameManager : MonoBehaviour {
                 SceneManager.LoadScene(5, LoadSceneMode.Additive);
                 break;
             case eBossType.BossB:
-
+                SceneManager.LoadScene(6, LoadSceneMode.Additive);
                 break;
             case eBossType.BossC:
-
+                SceneManager.LoadScene(7, LoadSceneMode.Additive);
                 break;
             default:
                 break;
