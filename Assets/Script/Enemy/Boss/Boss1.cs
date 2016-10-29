@@ -30,7 +30,7 @@ public class Boss1 : MonoBehaviour {
 		if (isNormal && patternCount == 0) {
 			interMul.shotCount++;
 			randSpreading.ShotCount += 10;
-		} else if (isNormal && patternCount == 1) {
+		} else if (!isNormal) {
 			overTaking.GroupCount++;
 		} else {
 			for(int i = 0; i < 2; i++)
@@ -44,6 +44,7 @@ public class Boss1 : MonoBehaviour {
 			}
 		}
 	}
+
 	void Start () {
 		StartCoroutine (TrensformManage ());
 	}

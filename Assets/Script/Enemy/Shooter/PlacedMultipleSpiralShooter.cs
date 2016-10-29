@@ -51,6 +51,7 @@ public class PlacedMultipleSpiralShooter : MonoBehaviour {
 					tBullet.MoveTime = MoveTime;
 					tBullet.StopTime = StopTime;
 					tBullet.Timer = 0;
+					tBullet.gameObject.name = "Boss3_Placed";
 				}
 			}
 			yield return new WaitForSeconds (shotDelay);
