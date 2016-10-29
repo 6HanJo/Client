@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour {
     static UIManager instance;
-    public UIManager Instance
+    static public UIManager Instance
     {
         get { return instance; }
     }
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour {
     {
         inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>(); 
 
-        SetTextTotalGold(2);
+        SetTextTotalGold(0);
         SetMaxSliderBossHP(100);
         SetTextLeftTime(InGameManager.Instance.maxTimeLimit);
     }
