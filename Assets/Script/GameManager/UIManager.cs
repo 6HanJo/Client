@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour {
     static UIManager instance;
@@ -19,63 +20,80 @@ public class UIManager : MonoBehaviour {
     public Text textTotalGold;
 
     public Text textBossHP;
-    public Slider sliderBossHP;
+    public EnergyBar sliderBossHP;
 
     public Text textLeftTime;
-    public Slider sliderLimitTime;
+    public EnergyBar sliderLimitTime;
 
     public Image imgPlayerChar;
 
+    public RectTransform panelStoreUI;
+
+    public GameObject goImgReBoot;
+
+    bool isPause = false;
+
     void Start()
     {
-        inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
+        inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>(); 
 
         SetTextTotalGold(2);
         SetMaxSliderBossHP(100);
-        SetTextLeftTime(2f);
+        SetTextLeftTime(InGameManager.Instance.maxTimeLimit);
     }
 
-    public IEnumerator CoUpdateSliderLimitTime()
-    {
-        yield return null;
-        while(true)
-        {
-            yield return null;
-            if(inGameManager.isPuaseGame == false)
-            {
-                sliderLimitTime.value = inGameManager.leftTime;
-            }
-        }
-    }
-
-    public IEnumerator CoUpdateTextLeftTime()
+    public IEnumerator CoUIUpdateLeftTime()
     {
         yield return new WaitForSeconds(1f);
         if(inGameManager.isPuaseGame == false)
         {
             SetTextLeftTime(inGameManager.leftTime);
+            sliderLimitTime.SetValueCurrent(inGameManager.leftTime);
         }
-        StartCoroutine(CoUpdateTextLeftTime());
+        StartCoroutine(CoUIUpdateLeftTime());
     }
 
-    public IEnumerator CoUpdateReBoot()
+    public IEnumerator CoUIReBoot()
     {
         yield return null;
         //연출
+        goImgReBoot.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        goImgReBoot.SetActive(false);
     }
 
+    public IEnumerator CoUIEnterBalanceAccounts()
+    {
+        yield return null;
+    }
 
+    public IEnumerator CoUIExitBalanceAccounts()
+    {
+        yield return null;
+    }
+
+    public IEnumerator CoUIEnterScore()
+    {
+        yield return null;
+        panelStoreUI.DOAnchorPos(Vector2.zero, 1f);
+    }
+
+    public IEnumerator CoUIExitScore()
+    {
+        yield return null;
+        panelStoreUI.DOAnchorPos(new Vector2(0f, -500f), 1f);
+    }
 
     public void SetTextTotalGold(int totalGold)
     {
         textTotalGold.text = totalGold.ToString();
     }
     
-    //UI 보스 최대 체력값 설저아
+    //UI 보스 최대 체력값 설정
     public void SetMaxSliderBossHP(int maxBossHp)
     {
-        sliderBossHP.maxValue = maxBossHp;
-        sliderBossHP.value = maxBossHp;
+        sliderBossHP.SetValueMax(maxBossHp);
+        sliderBossHP.SetValueCurrent(maxBossHp);
     }
 
     public void SetTextBossHP(int bossHP)
@@ -84,14 +102,16 @@ public class UIManager : MonoBehaviour {
     }
 
     //UI 최대 남은 시간 설정
-    public void SetMaxSliderLimitTime(float limitTime)
+    public void SetMaxSliderLimitTime(int limitTime)
     {
-        sliderLimitTime.maxValue = limitTime;
-        sliderLimitTime.value = limitTime;
+        sliderLimitTime.SetValueMax(limitTime);
+        sliderLimitTime.SetValueCurrent(limitTime);
     }
 
-    public void SetTextLeftTime(float leftTime)
+    public void SetTextLeftTime(int leftTime)
     {
+        if (leftTime < 0)
+            return;
         textLeftTime.text = leftTime.ToString("##0.");
     }
 }
