@@ -3,7 +3,11 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+<<<<<<< HEAD
 	public static PlayerControl instance;
+=======
+    public static PlayerControl instance;
+>>>>>>> 666cff6bb1daaa9661eff3552c1bfcc73fd33fd0
 
     //이동을 제어합니다.
     public float h, v;
@@ -23,11 +27,16 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
+<<<<<<< HEAD
         if (instance == null)
         {
             instance = this;
         }
 
+=======
+		if (instance == null)
+			instance = this;
+>>>>>>> 666cff6bb1daaa9661eff3552c1bfcc73fd33fd0
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
         //ani = GetComponent<Animator>();
