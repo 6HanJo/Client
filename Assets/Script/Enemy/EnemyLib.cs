@@ -29,7 +29,7 @@ public class EnemyLib : MonoBehaviour {
 		return Mathf.Atan2(PlayerControl.instance.transform.position.y - pos.y,PlayerControl.instance.transform.position.x - pos.x) / Mathf.PI / 2;
 	} 
 
-	public void ShootNWay(Vector2 pos, float angle, float angleRange, float speed, int count, float angleRate, float speedRate, GameObject bullet, float bulletMoney, float bulletHp)
+	public void ShootNWay(Vector2 pos, float angle, float angleRange, float speed, int count, float angleRate, float speedRate, GameObject bullet, int bulletMoney, float bulletHp)
 	{
 		for (int i = 0; i < count; i++) {
             tmp = spawnPool.Spawn(bullet);
@@ -45,7 +45,7 @@ public class EnemyLib : MonoBehaviour {
 		}
 	}
 
-	public void ShootPlacedNWay(Vector2 pos, float angle, float angleRange, float speed, int count, int moveTime, int stopTime, GameObject bullet, float bulletMoney, float bulletHp)
+	public void ShootPlacedNWay(Vector2 pos, float angle, float angleRange, float speed, int count, int moveTime, int stopTime, GameObject bullet, int bulletMoney, float bulletHp)
 	{
 		for (int i = 0; i < count; i++) {
             tmp = spawnPool.Spawn(bullet);

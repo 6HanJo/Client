@@ -9,7 +9,7 @@ public class GapShooter : MonoBehaviour {
 	private int Timer;
 	public GameObject bullet;
 	public bool canShoot = true;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
 	void Update () {
 		if (Timer == 0 && canShoot)

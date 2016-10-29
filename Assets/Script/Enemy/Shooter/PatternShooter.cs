@@ -19,7 +19,7 @@ public class PatternShooter : MonoBehaviour {
 	static SpawnPool spawnPool = null;
 	Transform tmp, tr;
 	Bullet tBullet;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
 	void Awake()
 	{

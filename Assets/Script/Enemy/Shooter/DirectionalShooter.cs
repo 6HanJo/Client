@@ -10,7 +10,7 @@ public class DirectionalShooter : MonoBehaviour {
 	public float shotDelay;
 	public bool canShoot = true;
 	public GameObject bullet;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
     public bool isPlayer = false, playerShoot = false, skill = false;
 
