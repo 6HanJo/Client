@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Skill5PlazmaMaker : MonoBehaviour
+public class Skill5PlazmaMaker : MonoBehaviour, ISkill
 {
 
 

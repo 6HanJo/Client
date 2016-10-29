@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SkillHungryAttacking : MonoBehaviour
+public class Skill3HungryAttacking : MonoBehaviour, ISkill
 {
 
     public status skillset;

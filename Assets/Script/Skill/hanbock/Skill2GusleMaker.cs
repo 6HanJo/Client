@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Skill2GusleMaker : MonoBehaviour {
+public class Skill2GusleMaker : MonoBehaviour, ISkill {
 
     public status skillset;
     public float movSpeed, waitTime, standTime;

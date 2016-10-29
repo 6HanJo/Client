@@ -20,6 +20,13 @@ public class SkillManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        arrSkillInfo[0].skill = player.GetComponent<Skill1ShoutingOut>();
+        arrSkillInfo[1].skill = player.GetComponent<Skill2GusleMaker>();
+        arrSkillInfo[2].skill = player.GetComponent<Skill3HungryAttacking>();
+        arrSkillInfo[3].skill = player.GetComponent<Skill4AngryAttacking>();
+        arrSkillInfo[4].skill = player.GetComponent<Skill5PlazmaMaker>();
+        arrSkillInfo[5].skill = player.GetComponent<Skill6LaserRotation>();
 
         for (int i = 0; i < arrSkillInfo.Length; i++)
         {
@@ -35,7 +42,8 @@ public class SkillManager : MonoBehaviour {
     {
         for (int i = 0; i < arrSkillInfo.Length; i++)
         {
-            OnUseSkill(arrSkillInfo[i]);
+            if(arrSkillInfo[i].isActive)
+                OnUseSkill(arrSkillInfo[i]);
         }
     }
 
@@ -43,7 +51,8 @@ public class SkillManager : MonoBehaviour {
     {
         for (int i = 0; i < arrSkillInfo.Length; i++)
         {
-            OnStopSkill(arrSkillInfo[i]);
+            if(arrSkillInfo[i].isActive)
+                OnStopSkill(arrSkillInfo[i]);
         }
     }
 
@@ -53,6 +62,8 @@ public class SkillManager : MonoBehaviour {
         for (int i = 0; i < arrSkillInfo.Length; i++)
         {
             SkillInfo info = arrSkillInfo[i];
+            if (info.skill != null)
+                info.isActive = true;
             info.skillCalculator.EventCoolTimeDone -= OnUseSkill;
             if(info.isActive)
             {
@@ -73,7 +84,7 @@ public class SkillManager : MonoBehaviour {
         info.imgSkillSlot.transform.DOPunchScale(new Vector3(0.4f,0.4f,0.4f), 0.2f, 0);
 
         //스킬 사용
-        
+        info.skill.UseSkill();
 
         //다시 쿨타임 계산
         info.skillCalculator.BeginCalculateCoolTime();
