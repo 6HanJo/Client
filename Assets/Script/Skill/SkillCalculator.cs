@@ -23,4 +23,10 @@ public class SkillCalculator : MonoBehaviour {
         yield return new WaitForSeconds(skillInfo.coolTime);
         EventCoolTimeDone(skillInfo);
     }
+
+    public void StopCalculateCoolTime()
+    {
+        DOTween.Clear();
+        StopAllCoroutines();
+    }
 }

@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour {
 
         SetTextTotalGold(2);
         SetMaxSliderBossHP(100);
-        SetTextLeftTime(2);
+        SetTextLeftTime(InGameManager.Instance.maxTimeLimit);
     }
 
     public IEnumerator CoUIUpdateLeftTime()
@@ -110,6 +110,8 @@ public class UIManager : MonoBehaviour {
 
     public void SetTextLeftTime(int leftTime)
     {
+        if (leftTime < 0)
+            return;
         textLeftTime.text = leftTime.ToString("##0.");
     }
 }

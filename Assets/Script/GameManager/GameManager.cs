@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour {
                     arrBtnBoss[(int)eBossType.BossB].onClick.AddListener(OnBtnBossBClicked);
                     arrBtnBoss[(int)eBossType.BossC].onClick.AddListener(OnBtnBossCClicked);
 
+                    /*
                     arrBtnLevel[(int)eBossLevel.Low] = GameObject.Find("BtnLowLevelBoss").GetComponent<Button>();
                     arrBtnLevel[(int)eBossLevel.Midium] = GameObject.Find("BtnMidiumLevelBoss").GetComponent<Button>();
                     arrBtnLevel[(int)eBossLevel.High] = GameObject.Find("BtnHighLevelBoss").GetComponent<Button>();
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour {
                     arrBtnLevel[(int)eBossLevel.Low].onClick.AddListener(OnBtnLowLevelBossClicked);
                     arrBtnLevel[(int)eBossLevel.Midium].onClick.AddListener(OnBtnMidiumLevelBossClicked);
                     arrBtnLevel[(int)eBossLevel.High].onClick.AddListener(OnBtnHighLevelBossClicked);
+                    */
                 }
                 break;
             case "SelectCharScene":
@@ -159,22 +161,26 @@ public class GameManager : MonoBehaviour {
 
     void OnBtnBossAClicked()
     {
-        LevelButtonInteractable(eBossType.BossA);
+        //velButtonInteractable(eBossType.BossA);
         bossType = eBossType.BossA;
+        LoadSceneSelectCharScene();
     }
 
     void OnBtnBossBClicked()
     {
-        LevelButtonInteractable(eBossType.BossB);
+        //velButtonInteractable(eBossType.BossB);
         bossType = eBossType.BossB;
+        LoadSceneSelectCharScene();
     }
 
     void OnBtnBossCClicked()
     {
-        LevelButtonInteractable(eBossType.BossC);
+        //LevelButtonInteractable(eBossType.BossC);
         bossType = eBossType.BossC;
+        LoadSceneSelectCharScene();
     }
 
+    /*
     void LevelButtonInteractable(eBossType type)
     {
         if (bossType == type)
@@ -185,6 +191,8 @@ public class GameManager : MonoBehaviour {
         }
         GameObject.Find("ImgSelector").transform.position = arrBtnBoss[(int)type].transform.position;
     }
+
+    */
 
     //SelectBossScene
     void OnBtnLowLevelBossClicked()

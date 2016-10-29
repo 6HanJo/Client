@@ -26,20 +26,24 @@ public class SkillManager : MonoBehaviour {
             arrSkillInfo[i].skillCalculator.skillInfo = arrSkillInfo[i];
         }
         AllSKillEventRegiste();
-        StartCoroutine(test());
+
+        InGameManager.Instance.EventTimeLimitBegin += StartUseAllSkill;
+        InGameManager.Instance.EventTimeLimitEnd += StopUseAllSKill;
     }
 
-    IEnumerator test()
-    {
-        yield return new WaitForSeconds(1f);
-        BeginUseAllSkill();
-    }
-
-    public void BeginUseAllSkill()
+    public void StartUseAllSkill()
     {
         for (int i = 0; i < arrSkillInfo.Length; i++)
         {
             OnUseSkill(arrSkillInfo[i]);
+        }
+    }
+
+    public void StopUseAllSKill()
+    {
+        for (int i = 0; i < arrSkillInfo.Length; i++)
+        {
+            OnStopSkill(arrSkillInfo[i]);
         }
     }
 
@@ -53,7 +57,7 @@ public class SkillManager : MonoBehaviour {
             if(info.isActive)
             {
                 info.skillCalculator.EventCoolTimeDone += OnUseSkill;
-                info.imgSkillSlot.sprite = info.sprSkillImage;
+                info.imgSkillSlot.sprite = info.sprSkillActiveImage;
             }
         }
     }
@@ -69,6 +73,11 @@ public class SkillManager : MonoBehaviour {
 
         //다시 쿨타임 계산
         info.skillCalculator.BeginCalculateCoolTime();
+    }
+
+    void OnStopSkill(SkillInfo info)
+    {
+        info.skillCalculator.StopCalculateCoolTime();
     }
 
     // Update is called once per frame

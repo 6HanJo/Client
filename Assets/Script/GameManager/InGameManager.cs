@@ -24,7 +24,7 @@ public class InGameManager : MonoBehaviour
     public event Callback EventExitStore;
 
     static InGameManager instance;
-    public InGameManager Instance
+    static public InGameManager Instance
     {
         get { return instance; }
     }
@@ -77,7 +77,7 @@ public class InGameManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Return))
         {
             if(playState == PlayState.Play)
                 OnReBoot();
@@ -128,6 +128,8 @@ public class InGameManager : MonoBehaviour
     IEnumerator CoGameEnd()
     {
         yield return null;
+
+
     }
 
     public void OnPauseGame()
@@ -181,15 +183,16 @@ public class InGameManager : MonoBehaviour
 
         while (isTimeLimitUpdating)
         {
-            yield return new WaitForSeconds(1f);
+            
             if(isPuaseGame == false)
             {
                 leftTime -= 1;
-                if (leftTime <= 0)
+                if (leftTime < 0)
                 {
                     OnTimeLimitEnd();
                 }
             }
+            yield return new WaitForSeconds(1f);
         }
     }
 
