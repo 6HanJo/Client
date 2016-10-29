@@ -3,12 +3,8 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
-<<<<<<< .merge_file_w6jDW0
-	public static PlayerControl instance;
-=======
-    public static PlayerControl instance;
 
->>>>>>> .merge_file_bFxUDI
+    public static PlayerControl instance;
 
     //이동을 제어합니다.
     public float h, v;
@@ -18,9 +14,10 @@ public class PlayerControl : MonoBehaviour
     public float basicSpeed, moveSpeed;
 
     //총알 정보
-    public GameObject bullet;
     public Transform bulletPos;
 
+
+    DirectionalShooter dr;
 
     Transform tr;
     Rigidbody2D ri;
@@ -28,18 +25,13 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
-<<<<<<< .merge_file_w6jDW0
 		if (instance == null)
 			instance = this;
-=======
-        if (instance == null)
-        {
-            instance = this;
-        }
 
->>>>>>> .merge_file_bFxUDI
+
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody2D>();
+        dr = GetComponent<DirectionalShooter>();
         //ani = GetComponent<Animator>();
     }
 
@@ -70,6 +62,9 @@ public class PlayerControl : MonoBehaviour
             }
             else {
                 v = 0;
+            }
+            if (Input.GetKey(KeyCode.Space)) {
+                dr.canShoot = true;
             }
         }
     }
