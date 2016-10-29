@@ -14,8 +14,16 @@ public class OvertakingShooter : MonoBehaviour {
 	private int Timer;
 	public GameObject bullet;
 	public bool canShoot = true;
-	void Start () {
- 		ShotAngle = EnemyLib.instance.GetPlayerAngle (transform.position);
+
+    Transform tr;
+
+    void Awake()
+    {
+        tr = GetComponent<Transform>();
+    }
+
+    void Start () {
+ 		ShotAngle = EnemyLib.instance.GetPlayerAngle (tr.position);
 	}
 
 	void Update () {
@@ -26,7 +34,7 @@ public class OvertakingShooter : MonoBehaviour {
 			if (i < GroupCount && Timer % GroupInterval == 0)
 			{
 				EnemyLib.instance.ShootNWay(
-					transform.position,ShotAngle + GroupAngle * i, ShotAngleRange,
+					tr.position,ShotAngle + GroupAngle * i, ShotAngleRange,
 					ShotSpeed + GroupSpeed * i, ShotCount, 0, 0, bullet);
 			}
 			Timer = (Timer + 1) % Interval;

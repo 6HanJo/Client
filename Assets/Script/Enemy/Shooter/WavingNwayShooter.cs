@@ -13,12 +13,19 @@ public class WavingNwayShooter : MonoBehaviour {
 	public bool canShoot = true;
 	public GameObject bullet;
 
-	void Update () 
+    Transform tr;
+
+    void Awake()
+    {
+        tr = GetComponent<Transform>();
+    }
+
+    void Update () 
 	{
 		if (Timer%Interval == 0 && canShoot)
 		{
 			EnemyLib.instance.ShootNWay(
-				transform.position, 
+				tr.position, 
 				ShotAngle + WavingAngleRange * Mathf.Sin(Mathf.PI * 2 * Timer / Cycle), 
 				ShotAngleRange, ShotSpeed, ShotCount, 0, 0, bullet);
 		}

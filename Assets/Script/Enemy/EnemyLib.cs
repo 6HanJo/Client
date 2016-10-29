@@ -1,14 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PathologicalGames;
+
+
 
 public class EnemyLib : MonoBehaviour {
 	public static EnemyLib instance;
 
-	void Awake()
+    static SpawnPool spawnPool = null;
+    Transform tmp, tr;
+    Bullet tBullet;
+
+    void Awake()
 	{
 		if (instance == null)
 			instance = this;
 	}
+
+    void Start() {
+        if (spawnPool == null)
+        {
+            spawnPool = PoolManager.Pools["Test"];
+        }
+    }
 
 	public float GetPlayerAngle(Vector2 pos)
 	{
@@ -18,8 +32,8 @@ public class EnemyLib : MonoBehaviour {
 	public void ShootNWay(Vector2 pos, float angle, float angleRange, float speed, int count, float angleRate, float speedRate, GameObject bullet)
 	{
 		for (int i = 0; i < count; i++) {
-			GameObject tmp = Instantiate (bullet) as GameObject;
-			Bullet tBullet = tmp.GetComponent<Bullet> ();
+            tmp = spawnPool.Spawn(bullet);
+            Bullet tBullet = tmp.GetComponent<Bullet> ();
 			tmp.transform.position = pos;
 			tBullet.speed = speed;
 			tBullet.angle = angle + angleRange * ((float)i / (count - 1) - 0.5f);
@@ -30,12 +44,10 @@ public class EnemyLib : MonoBehaviour {
 	public void ShootPlacedNWay(Vector2 pos, float angle, float angleRange, float speed, int count, int moveTime, int stopTime, GameObject bullet)
 	{
 		for (int i = 0; i < count; i++) {
-			GameObject tmp = Instantiate (bullet) as GameObject;
-			print (bullet);
-			PlacedBullet tBullet = tmp.GetComponent<PlacedBullet> ();
+            tmp = spawnPool.Spawn(bullet);
+            PlacedBullet tBullet = tmp.GetComponent<PlacedBullet> ();
 			tmp.transform.position = pos;
 			tBullet.angle = angle + angleRange * ((float)i / (count - 1) - 0.5f);
-			print (tBullet);
 			tBullet.speed = speed;
 			tBullet.InitialSpeed = speed;
 			tBullet.MoveTime = moveTime;
