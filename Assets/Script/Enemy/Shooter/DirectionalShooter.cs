@@ -10,7 +10,8 @@ public class DirectionalShooter : MonoBehaviour {
 	public float shotDelay;
 	public bool canShoot = true;
 	public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
     public bool isPlayer = false, playerShoot = false, skill = false;
 
     public float bulletDmg, bulletCnt, bulletStandTime;
@@ -56,6 +57,9 @@ public class DirectionalShooter : MonoBehaviour {
         tmp.transform.position = tr.position;
         tBullet.speed = shotSpeed;
         tBullet.angle = angle;
+		tBullet.basicHP = bulletHp;
+		tBullet.hp = bulletHp;
+		tBullet.money = bulletMoney;
         yield return new WaitForSeconds(shotDelay);
         canShoot = true;
     }

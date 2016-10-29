@@ -10,7 +10,8 @@ public class IntervalMultipleSpiralShooter : MonoBehaviour {
 	public int shotCount;
 	public bool canShoot = true;
 	public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
 
     static SpawnPool spawnPool = null;
     Transform tmp, tr;
@@ -44,6 +45,9 @@ public class IntervalMultipleSpiralShooter : MonoBehaviour {
 					tBullet.angle = shotAngle + (float)i / shotCount;
 					tBullet.speedRate = 0;
 					tBullet.angleRate = 0;
+					tBullet.basicHP = bulletHp;
+					tBullet.hp = bulletHp;
+					tBullet.money = bulletMoney;
 				}
 			}
 			yield return new WaitForSeconds (shotDelay);

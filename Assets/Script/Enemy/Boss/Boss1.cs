@@ -50,9 +50,8 @@ public class Boss1 : MonoBehaviour {
 	}
 
 	IEnumerator TrensformManage() {
-		while(true)
-		{
-			yield return new WaitForSeconds(15);
+		while (true) {
+			yield return new WaitForSeconds (15);
 			if (isNormal && patternCount == 0) {
 				placedMul.canShoot = true;
 				overTaking.canShoot = true;
@@ -66,8 +65,7 @@ public class Boss1 : MonoBehaviour {
 				bentSpiral [1].canShoot = true;
 				placedMul.canShoot = false;
 				overTaking.canShoot = false;
-			}
-			else {
+			} else {
 				isNormal = true;
 				sR.sprite = Normal;
 				bentSpiral [0].canShoot = false;
@@ -81,5 +79,4 @@ public class Boss1 : MonoBehaviour {
 				patternCount = 0;
 		}
 	}
-
 }

@@ -14,7 +14,8 @@ public class OvertakingShooter : MonoBehaviour {
 	private int Timer;
 	public GameObject bullet;
 	public bool canShoot = true;
-
+	public float bulletMoney;
+	public float bulletHp;
     Transform tr;
 
     void Awake()
@@ -34,7 +35,7 @@ public class OvertakingShooter : MonoBehaviour {
 			{
 				EnemyLib.instance.ShootNWay(
 					tr.position,ShotAngle + GroupAngle * i, ShotAngleRange,
-					ShotSpeed + GroupSpeed * i, ShotCount, 0, 0, bullet);
+					ShotSpeed + GroupSpeed * i, ShotCount, 0, 0, bullet, bulletMoney, bulletHp);
 			}
 			Timer = (Timer + 1) % Interval;
 		}

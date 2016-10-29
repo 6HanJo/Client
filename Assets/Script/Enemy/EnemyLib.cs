@@ -29,7 +29,7 @@ public class EnemyLib : MonoBehaviour {
 		return Mathf.Atan2(PlayerControl.instance.transform.position.y - pos.y,PlayerControl.instance.transform.position.x - pos.x) / Mathf.PI / 2;
 	} 
 
-	public void ShootNWay(Vector2 pos, float angle, float angleRange, float speed, int count, float angleRate, float speedRate, GameObject bullet)
+	public void ShootNWay(Vector2 pos, float angle, float angleRange, float speed, int count, float angleRate, float speedRate, GameObject bullet, float bulletMoney, float bulletHp)
 	{
 		for (int i = 0; i < count; i++) {
             tmp = spawnPool.Spawn(bullet);
@@ -39,10 +39,13 @@ public class EnemyLib : MonoBehaviour {
 			tBullet.angle = angle + angleRange * ((float)i / (count - 1) - 0.5f);
 			tBullet.angleRate = angleRate;
 			tBullet.speedRate = speedRate;
+			tBullet.money = bulletMoney;
+			tBullet.basicHP = bulletHp;
+			tBullet.hp = bulletHp;
 		}
 	}
 
-	public void ShootPlacedNWay(Vector2 pos, float angle, float angleRange, float speed, int count, int moveTime, int stopTime, GameObject bullet)
+	public void ShootPlacedNWay(Vector2 pos, float angle, float angleRange, float speed, int count, int moveTime, int stopTime, GameObject bullet, float bulletMoney, float bulletHp)
 	{
 		for (int i = 0; i < count; i++) {
             tmp = spawnPool.Spawn(bullet);
@@ -55,6 +58,9 @@ public class EnemyLib : MonoBehaviour {
 			tBullet.StopTime = stopTime;
 			tBullet.speedRate = 0;
 			tBullet.angleRate = 0;
+			tBullet.basicHP = bulletHp;
+			tBullet.hp = bulletHp;
+			tBullet.money = bulletMoney;
 		}		
 	}
 }

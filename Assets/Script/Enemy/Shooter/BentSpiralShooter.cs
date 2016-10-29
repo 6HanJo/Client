@@ -13,7 +13,8 @@ public class BentSpiralShooter : MonoBehaviour {
 	public float BulletSpeedRate;
 	public bool canShoot = true;
 	public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
     static SpawnPool spawnPool = null;
     Transform tmp, tr;
     Bullet tBullet;
@@ -43,6 +44,9 @@ public class BentSpiralShooter : MonoBehaviour {
 				tBullet.angle = ShotAngle + (float)i / ShotCount;
 				tBullet.angleRate = BulletAngleRate;
 				tBullet.speedRate = BulletSpeedRate;
+				tBullet.basicHP = bulletHp;
+				tBullet.hp = bulletHp;
+				tBullet.money = bulletMoney;
 			}
 			ShotAngle += ShotAngleRate;
 			ShotAngle -= Mathf.Floor(ShotAngle);

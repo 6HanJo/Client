@@ -19,7 +19,8 @@ public class PatternShooter : MonoBehaviour {
 	static SpawnPool spawnPool = null;
 	Transform tmp, tr;
 	Bullet tBullet;
-
+	public float bulletMoney;
+	public float bulletHp;
 	void Awake()
 	{
 		tr = GetComponent<Transform>();
@@ -79,6 +80,9 @@ public class PatternShooter : MonoBehaviour {
 					tBullet.angle = ShotAngle + ShotAngleRange * ((float)i / (Width - 1) - 0.5f);
 					tBullet.speedRate = 0;
 					tBullet.angleRate = 0;
+					tBullet.basicHP = bulletHp;
+					tBullet.hp = bulletHp;
+					tBullet.money = bulletMoney;
 				}
 			}
 			ptcnt++;

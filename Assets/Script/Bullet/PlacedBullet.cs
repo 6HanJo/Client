@@ -5,6 +5,7 @@ public class PlacedBullet : MonoBehaviour
 {
 
     public float basicHP, hp;
+	public float money;
     public float InitialSpeed;
     public int MoveTime;
     public int StopTime;
