@@ -41,6 +41,12 @@ public class GameManager : MonoBehaviour {
     public eBossLevel bossLevel;
     public eCharType charType;
 
+    public float onceAddGoldBonus = 0.1f;
+    public int addGoldBonusPlusTime = 10;
+    public float goldBonus = 0;
+
+    public int totalGold = 0;
+
     //SelectBossScene
     Button[] arrBtnBoss;
     Button[] arrBtnLevel;
@@ -61,7 +67,7 @@ public class GameManager : MonoBehaviour {
     {
         DontDestroyOnLoad(this.gameObject);
         //GameObject.Find("BtnGameStart").GetComponent<Button>().onClick.AddListener(OnBtnGameStartClicked);
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded; 
         SceneManager.LoadScene(startSceneIdx);
 
         //SelectBossScene

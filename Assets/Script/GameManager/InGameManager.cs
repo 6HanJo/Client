@@ -39,14 +39,13 @@ public class InGameManager : MonoBehaviour
 
     public UIManager uiManager;
 
-    public float maxTimeLimit;
-    public float leftTime;
+    public int maxTimeLimit;
+    public int leftTime;
     public bool isTimeLimitUpdating;
 
     public PlayState playState;
 
     public bool isPuaseGame = false;
-
 
     void Start()
     {
@@ -80,7 +79,8 @@ public class InGameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            OnReBoot();
+            if(playState == PlayState.Play)
+                OnReBoot();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -106,7 +106,6 @@ public class InGameManager : MonoBehaviour
 
     IEnumerator CoGameBegin()
     {
-        yield return null;
         yield return new WaitForSeconds(1f);
         playState = PlayState.Play;
         OnTimeLimitBegin();
@@ -178,17 +177,15 @@ public class InGameManager : MonoBehaviour
 
     IEnumerator CoTimeLimitUpdate()
     {
-        yield return null;
-        StartCoroutine(uiManager.CoUpdateSliderLimitTime());
-        StartCoroutine(uiManager.CoUpdateTextLeftTime());
+        StartCoroutine(uiManager.CoUIUpdateLeftTime());
 
         while (isTimeLimitUpdating)
         {
-            yield return null;
+            yield return new WaitForSeconds(1f);
             if(isPuaseGame == false)
             {
-                leftTime -= Time.deltaTime;
-                if (leftTime <= 0f)
+                leftTime -= 1;
+                if (leftTime <= 0)
                 {
                     OnTimeLimitEnd();
                 }
@@ -235,7 +232,8 @@ public class InGameManager : MonoBehaviour
     {
         yield return null;
         //리붓 연출
-        yield return StartCoroutine(uiManager.CoUpdateReBoot());
+        
+        yield return StartCoroutine(uiManager.CoUIReBoot());
         OnBalanceAccounts();
     }
 
@@ -256,6 +254,11 @@ public class InGameManager : MonoBehaviour
     IEnumerator CoBalanceAccounts()
     {
         yield return null;
+        yield return StartCoroutine(uiManager.CoUIEnterBalanceAccounts());
+        
+        yield return StartCoroutine(uiManager.CoUIExitBalanceAccounts());
+
+        OnEnterStore();
     }
 
     public void OnEnterStore()
@@ -269,12 +272,14 @@ public class InGameManager : MonoBehaviour
     void EnterStore()
     {
         Debug.Log("EnterStore");
-
+        StartCoroutine(CoEnterStore());
     }
 
     IEnumerator CoEnterStore()
     {
         yield return null;
+        yield return StartCoroutine(uiManager.CoUIEnterScore());
+
         playState = PlayState.Store;
     }
 
@@ -289,12 +294,14 @@ public class InGameManager : MonoBehaviour
     void ExitStore()
     {
         Debug.Log("ExitStore");
-        
+        StartCoroutine(CoExitStore());
     }
 
     IEnumerator CoExitStore()
     {
         yield return null;
+        yield return StartCoroutine(uiManager.CoUIExitScore());
+        OnResumeGame();
         playState = PlayState.Play;
     }
 }
