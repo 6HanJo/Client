@@ -59,6 +59,10 @@ public class SkillManager : MonoBehaviour {
                 info.skillCalculator.EventCoolTimeDone += OnUseSkill;
                 info.imgSkillSlot.sprite = info.sprSkillActiveImage;
             }
+            else
+            {
+                info.imgSkillSlot.sprite = info.sprSkillDeActiveImage;
+            }
         }
     }
 
@@ -69,7 +73,7 @@ public class SkillManager : MonoBehaviour {
         info.imgSkillSlot.transform.DOPunchScale(new Vector3(0.4f,0.4f,0.4f), 0.2f, 0);
 
         //스킬 사용
-
+        
 
         //다시 쿨타임 계산
         info.skillCalculator.BeginCalculateCoolTime();
