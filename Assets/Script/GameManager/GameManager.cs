@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         //GameObject.Find("BtnGameStart").GetComponent<Button>().onClick.AddListener(OnBtnGameStartClicked);
         SceneManager.sceneLoaded += OnSceneLoaded; 
-//        SceneManager.LoadScene(startSceneIdx);
+        SceneManager.LoadScene(startSceneIdx);
 
         //SelectBossScene
         arrBtnBoss = new Button[3];
@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour {
     //TitleScene
     void OnBtnGameStartClicked()
     {
+        Debug.Log("shit");
         SceneManager.LoadScene("SelectBossScene");
     }
 
@@ -252,6 +253,21 @@ public class GameManager : MonoBehaviour {
         Debug.Log("BossLevel : " + bossLevel);
         Debug.Log("Character Type : " + charType);
         SceneManager.LoadScene("InGameScene");
+
+        switch (bossType)
+        {
+            case eBossType.BossA:
+                SceneManager.LoadScene(5, LoadSceneMode.Additive);
+                break;
+            case eBossType.BossB:
+                SceneManager.LoadScene(6, LoadSceneMode.Additive);
+                break;
+            case eBossType.BossC:
+                SceneManager.LoadScene(7, LoadSceneMode.Additive);
+                break;
+            default:
+                break;
+        }
     }
 
     void OnBtnBackToTitleClicked()

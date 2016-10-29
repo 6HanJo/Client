@@ -42,6 +42,7 @@ public class InGameManager : MonoBehaviour
     public int maxTimeLimit;
     public int leftTime;
     public bool isTimeLimitUpdating;
+    public int[] skillBuild;
 
     public PlayState playState;
 
