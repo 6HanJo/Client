@@ -38,7 +38,7 @@ public class BentSpiralShooter : MonoBehaviour {
 			{
 				tmp = spawnPool.Spawn(bullet);
 				tBullet = tmp.GetComponent<Bullet> ();
-				tmp.transform.position = transform.position;
+				tmp.transform.position = tr.position;
 				tBullet.speed = ShotSpeed;
 				tBullet.angle = ShotAngle + (float)i / ShotCount;
 				tBullet.angleRate = BulletAngleRate;
