@@ -38,6 +38,7 @@ public class EnemyLib : MonoBehaviour {
 			tBullet.speed = speed;
 			tBullet.angle = angle + angleRange * ((float)i / (count - 1) - 0.5f);
 			tBullet.angleRate = angleRate;
+			tBullet.speedRate = speedRate;
 		}
 	}
 
@@ -52,6 +53,8 @@ public class EnemyLib : MonoBehaviour {
 			tBullet.InitialSpeed = speed;
 			tBullet.MoveTime = moveTime;
 			tBullet.StopTime = stopTime;
+			tBullet.speedRate = 0;
+			tBullet.angleRate = 0;
 		}		
 	}
 }

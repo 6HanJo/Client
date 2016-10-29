@@ -15,7 +15,7 @@ public class GapShooter : MonoBehaviour {
 		{
 			EnemyLib.instance.ShootNWay(
 				transform.position, 
-				Random.Range(0.0f, 0.5f), 
+				Random.Range(0.0f, 1f), 
 				angleRange, speed, count, 0, 0, bullet);
 		}
 		if (canShoot)

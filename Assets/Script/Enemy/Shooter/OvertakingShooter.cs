@@ -21,24 +21,20 @@ public class OvertakingShooter : MonoBehaviour {
     {
         tr = GetComponent<Transform>();
     }
-
-    void Start () {
- 		ShotAngle = EnemyLib.instance.GetPlayerAngle (tr.position);
-	}
-
+		
 	void Update () {
 		int i = Timer / GroupInterval;
 
 		if (canShoot)
 		{
-			if (i < GroupCount && Timer % GroupInterval == 0)
+			if (Timer == 0) {
+				ShotAngle = EnemyLib.instance.GetPlayerAngle (tr.position);
+				GroupAngle *= -1;
+			}if (i < GroupCount && Timer % GroupInterval == 0)
 			{
 				EnemyLib.instance.ShootNWay(
 					tr.position,ShotAngle + GroupAngle * i, ShotAngleRange,
 					ShotSpeed + GroupSpeed * i, ShotCount, 0, 0, bullet);
-			}
-			if (i > GroupCount) {
-				GroupAngle *= -1;
 			}
 			Timer = (Timer + 1) % Interval;
 		}

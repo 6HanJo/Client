@@ -30,7 +30,7 @@ public class Boss1 : MonoBehaviour {
 		if (isNormal && patternCount == 0) {
 			interMul.shotCount++;
 			randSpreading.ShotCount += 10;
-		} else if (isNormal && patternCount == 1) {
+		} else if (!isNormal) {
 			overTaking.GroupCount++;
 		} else {
 			for(int i = 0; i < 2; i++)
@@ -40,10 +40,11 @@ public class Boss1 : MonoBehaviour {
 					bentSpiral [i].BulletAngleRate += 0.0005f;
 				else 
 					bentSpiral [i].BulletAngleRate -= 0.0005f;
-				bentSpiral [i].BulletSpeedRate += 0.005f;
+				bentSpiral [i].BulletSpeedRate += 0.007f;
 			}
 		}
 	}
+
 	void Start () {
 		StartCoroutine (TrensformManage ());
 	}
