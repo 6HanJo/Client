@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour {
         get { return instance; }
     }
 
+    InGameManager inGameManager;
+
     void Awake()
     {
         instance = this;
@@ -26,11 +28,42 @@ public class UIManager : MonoBehaviour {
 
     void Start()
     {
+        inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
+
         SetTextTotalGold(2);
         SetMaxSliderBossHP(100);
-        SetMaxSliderLimitTime(200f);
         SetTextLeftTime(2f);
     }
+
+    public IEnumerator CoUpdateSliderLimitTime()
+    {
+        yield return null;
+        while(true)
+        {
+            yield return null;
+            if(inGameManager.isPuaseGame == false)
+            {
+                sliderLimitTime.value = inGameManager.leftTime;
+            }
+        }
+    }
+
+    public IEnumerator CoUpdateTextLeftTime()
+    {
+        yield return new WaitForSeconds(1f);
+        if(inGameManager.isPuaseGame == false)
+        {
+            SetTextLeftTime(inGameManager.leftTime);
+        }
+        StartCoroutine(CoUpdateTextLeftTime());
+    }
+
+    public IEnumerator CoUpdateReBoot()
+    {
+        yield return null;
+        //연출
+    }
+
 
 
     public void SetTextTotalGold(int totalGold)
@@ -59,6 +92,6 @@ public class UIManager : MonoBehaviour {
 
     public void SetTextLeftTime(float leftTime)
     {
-        textLeftTime.text = leftTime.ToString("##0.##");
+        textLeftTime.text = leftTime.ToString("##0.");
     }
 }
