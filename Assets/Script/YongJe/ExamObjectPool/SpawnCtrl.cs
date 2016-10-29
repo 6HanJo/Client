@@ -21,8 +21,12 @@ public class SpawnCtrl : MonoBehaviour
         }
     }
 
-    void OnSpawned() {
+    public void SetTimeDespawn(float time) {
+        StartCoroutine("Delay", time);
+    }
 
+    void OnSpawned()
+    {
         tr.localScale = new Vector3(1, 1, 1);
     }
 
@@ -39,6 +43,11 @@ public class SpawnCtrl : MonoBehaviour
             spawnPool.Despawn(tr);
             tr.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    IEnumerator Delay(float time) {
+        yield return new WaitForSeconds(time);
+        SetActives();
     }
 
 }

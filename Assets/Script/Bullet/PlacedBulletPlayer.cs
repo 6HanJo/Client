@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlacedBulletPlayer : MonoBehaviour
 {
-    public float basicHP,hp;
+    public float basicHP, hp;
 
     public float InitialSpeed;
     public int MoveTime;
