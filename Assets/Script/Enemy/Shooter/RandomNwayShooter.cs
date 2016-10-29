@@ -38,7 +38,7 @@ public class RandomNwayShooter : MonoBehaviour
             {
                 tmp = spawnPool.Spawn(bullet);
                 tBullet = tmp.GetComponent<Bullet>();
-                tmp.transform.position = transform.position;
+				tmp.transform.position = tr.position;
                 tBullet.speed = ShotSpeed;
                 tBullet.angle = EnemyLib.instance.GetPlayerAngle(transform.position) + ShotAngleRange * (Random.Range(0.0f, 1.0f) - 0.5f);
             }

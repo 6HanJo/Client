@@ -9,15 +9,21 @@ public class Bullet : MonoBehaviour
     public float speedRate = 0;
 
     float rad;
-    Transform tr;
     Rigidbody2D ri;
 
 
     void Awake()
-    {
-        tr = GetComponent<Transform>();
-        ri = GetComponent<Rigidbody2D>();
-    }
+	{
+		ri = GetComponent<Rigidbody2D> ();
+	}
+
+	void onEnable()
+	{
+		angle = 0;
+		angleRate = 0;
+		speed = 0;
+		speedRate = 0;
+	}
 
     void FixedUpdate()
     {
