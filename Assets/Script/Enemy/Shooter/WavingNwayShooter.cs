@@ -12,7 +12,7 @@ public class WavingNwayShooter : MonoBehaviour {
 	private int Timer;
 	public bool canShoot = true;
 	public GameObject bullet;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
     Transform tr;
 

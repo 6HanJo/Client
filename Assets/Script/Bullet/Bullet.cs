@@ -4,7 +4,7 @@ using System.Collections;
 public class Bullet : MonoBehaviour
 {
     public float basicHP, hp;
-	public float money;
+	public int money;
     public float angle = 0;
     public float angleRate = 0;
     public float speed = 0;
@@ -30,6 +30,8 @@ public class Bullet : MonoBehaviour
         if (hp <= 0)
         {
             sc.SetActives();
+			GameManager.Instance.totalGold += money;
+			print (GameManager.Instance.totalGold);
         }
         float percent = (hp / basicHP) * 100;
         tr.localScale = new Vector3(1 * percent / 100, 1 * percent / 100, 1);

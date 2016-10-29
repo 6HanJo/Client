@@ -12,7 +12,7 @@ public class RandomSpreadingShooter : MonoBehaviour
     private int Timer;
     public bool canShoot = true;
     public GameObject bullet;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
     static SpawnPool spawnPool = null;
     Transform tmp, tr;

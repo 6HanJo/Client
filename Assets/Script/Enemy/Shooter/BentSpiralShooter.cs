@@ -13,7 +13,7 @@ public class BentSpiralShooter : MonoBehaviour {
 	public float BulletSpeedRate;
 	public bool canShoot = true;
 	public GameObject bullet;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
     static SpawnPool spawnPool = null;
     Transform tmp, tr;

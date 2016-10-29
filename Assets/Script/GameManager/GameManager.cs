@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         //GameObject.Find("BtnGameStart").GetComponent<Button>().onClick.AddListener(OnBtnGameStartClicked);
         SceneManager.sceneLoaded += OnSceneLoaded; 
-        SceneManager.LoadScene(startSceneIdx);
+//        SceneManager.LoadScene(startSceneIdx);
 
         //SelectBossScene
         arrBtnBoss = new Button[3];

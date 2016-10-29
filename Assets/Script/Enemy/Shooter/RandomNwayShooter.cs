@@ -11,7 +11,7 @@ public class RandomNwayShooter : MonoBehaviour
     private int Timer;
     public GameObject bullet;
     public bool canShoot = true;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
     static SpawnPool spawnPool = null;
     Transform tmp, tr;

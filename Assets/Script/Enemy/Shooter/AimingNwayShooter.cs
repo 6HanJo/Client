@@ -11,7 +11,7 @@ public class AimingNwayShooter : MonoBehaviour {
 	public int StopTime;
 	public bool canShoot = true;
 	public GameObject bullet;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
     Transform tr;
 

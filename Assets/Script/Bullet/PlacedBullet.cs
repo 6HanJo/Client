@@ -5,7 +5,7 @@ public class PlacedBullet : MonoBehaviour
 {
 
     public float basicHP, hp;
-	public float money;
+	public int money;
     public float InitialSpeed;
     public int MoveTime;
     public int StopTime;
@@ -35,6 +35,7 @@ public class PlacedBullet : MonoBehaviour
         if (hp <= 0)
         {
             sc.SetActives();
+			GameManager.Instance.totalGold += money;
         }
         float percent = (hp / basicHP) * 100;
         tr.localScale = new Vector3(1 * percent / 100, 1 * percent / 100, 1);

@@ -13,7 +13,7 @@ public class PlacedMultipleSpiralShooter : MonoBehaviour {
 	public int MoveTime;
 	public int StopTime;
 	public GameObject bullet;
-	public float bulletMoney;
+	public int bulletMoney;
 	public float bulletHp;
 
 	static SpawnPool spawnPool = null;
