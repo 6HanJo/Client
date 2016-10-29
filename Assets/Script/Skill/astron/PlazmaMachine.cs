@@ -34,7 +34,7 @@ public class PlazmaMachine : MonoBehaviour {
 
     IEnumerator Use()
     {
-        transform.localScale = new Vector2(1, length);
+        transform.localScale = new Vector2(4, length);
         yield return new WaitForSeconds(waitTime);
         roted = true;
         yield return new WaitForSeconds(standTime);

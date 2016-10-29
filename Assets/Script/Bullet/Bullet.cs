@@ -35,8 +35,6 @@ public class Bullet : MonoBehaviour
         }
         float percent = (hp / basicHP) * 100;
         tr.localScale = new Vector3(1 * percent / 100, 1 * percent / 100, 1);
-
-        
     }
 
 	void onEnable()
