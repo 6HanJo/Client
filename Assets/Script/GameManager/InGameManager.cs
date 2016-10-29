@@ -7,11 +7,13 @@ public class InGameManager : MonoBehaviour
     public event CallbackGameEnd EventGameEnd;
     public event Callback EventTimeLimitBegin;
     public event Callback EventTimeLimitEnd;
+    public event Callback EventReBoot;
 
     public static InGameManager instance;
 
     public float maxTimeLimit;
     float currentTimeLimit;
+    bool isTimeLimitUpdating;
 
     void Awake()
     {
@@ -23,12 +25,21 @@ public class InGameManager : MonoBehaviour
 
     void Start()
     {
+        //Event
         EventGameBegin += GameBegin;
         EventGameEnd += GameEnd;
         EventTimeLimitBegin += TimeLimitBegin;
         EventTimeLimitEnd += TimeLimitEnd;
+
+        Init();
     }
-    
+
+    void Init()
+    {
+        currentTimeLimit = maxTimeLimit;
+        isTimeLimitUpdating = false;
+    }
+
     void Update()
     {
 
@@ -72,8 +83,20 @@ public class InGameManager : MonoBehaviour
     void TimeLimitBegin()
     {
         Debug.Log("TimeLimitBegin");
-
+        isTimeLimitUpdating = true;
+        StartCoroutine(CoTimeLimitUpdate());
     }
+
+    IEnumerator CoTimeLimitUpdate()
+    {
+        yield return null;
+        while(isTimeLimitUpdating)
+        {
+            currentTimeLimit -= Time.deltaTime;
+            yield return null;
+        }
+    }
+
 
     public void OnTimeLimitEnd()
     {
@@ -83,12 +106,7 @@ public class InGameManager : MonoBehaviour
     void TimeLimitEnd()
     {
         Debug.Log("TimeLimitEnd");
-    }
-
-    void TimeLimitUpdate()
-    {
-        currentTimeLimit -= Time.deltaTime;
-    }
-    
+        isTimeLimitUpdating = false;
+    }    
 
 }

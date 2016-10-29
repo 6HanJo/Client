@@ -8,7 +8,8 @@ public class SpawnCtrl : MonoBehaviour
 
     Transform tr;
 
-    void Awake() {
+    void Awake()
+    {
         tr = GetComponent<Transform>();
     }
 
@@ -20,12 +21,14 @@ public class SpawnCtrl : MonoBehaviour
         }
     }
 
-    public void SetActives() {
+    public void SetActives()
+    {
         spawnPool.Despawn(tr);
     }
 
     void OnBecameInvisible()
     {
-        spawnPool.Despawn(tr);
+        if (gameObject.activeSelf)
+            spawnPool.Despawn(tr);
     }
 }
