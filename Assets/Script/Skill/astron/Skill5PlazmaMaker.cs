@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlazmaMaker : MonoBehaviour
+public class Skill5PlazmaMaker : MonoBehaviour
 {
 
 
@@ -16,8 +16,8 @@ public class PlazmaMaker : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("Delay");
-        UseSkill();
+        //StartCoroutine("Delay");
+        //UseSkill();
     }
 
     public void SetSkill(float hp, float length, float reload, float rotSpeed, float waitTime, float standTime)

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AngryAttacking : MonoBehaviour {
+public class SkillAngryAttacking : MonoBehaviour {
 
     public status skillset;
     public float shotCnt, intervalTime, shotIntervalTime, bulletSpeed;

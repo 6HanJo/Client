@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 //공격력 사거리 재장전
-public class LaserRotation : MonoBehaviour
+public class Skill6LaserRotation : MonoBehaviour
 {
 
     public status skillset;
@@ -21,8 +21,8 @@ public class LaserRotation : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("Delay");
-        UseSkill();
+        //StartCoroutine("Delay");
+        //UseSkill();
     }
 
     public void SetSkill(float hp, float length, float reload, float movSpeed, float minRot, float maxRot, float waitTime, float standTime, int machineCnt) {
