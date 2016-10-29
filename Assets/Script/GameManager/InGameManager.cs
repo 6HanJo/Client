@@ -37,11 +37,15 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+    public UIManager uiManager;
+
     public float maxTimeLimit;
-    float leftTime;
-    bool isTimeLimitUpdating;
+    public float leftTime;
+    public bool isTimeLimitUpdating;
 
     public PlayState playState;
+
+    public bool isPuaseGame = false;
 
 
     void Start()
@@ -59,18 +63,32 @@ public class InGameManager : MonoBehaviour
         EventExitStore += ExitStore;
 
         Init();
+
+        OnGameBegin();
     }
 
     void Init()
     {
         leftTime = maxTimeLimit;
+        uiManager.SetMaxSliderLimitTime(maxTimeLimit);
+
         isTimeLimitUpdating = false;
         playState = PlayState.Init;
     }
 
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            OnReBoot();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (isPuaseGame == false)
+                OnPauseGame();
+            else
+                OnResumeGame();
+        }
     }
 
     public void OnGameBegin()
@@ -89,6 +107,9 @@ public class InGameManager : MonoBehaviour
     IEnumerator CoGameBegin()
     {
         yield return null;
+        yield return new WaitForSeconds(1f);
+        playState = PlayState.Play;
+        OnTimeLimitBegin();
     }
     
     public void OnGameEnd(bool isWin)
@@ -101,6 +122,7 @@ public class InGameManager : MonoBehaviour
 
     void GameEnd(bool isWin)
     {
+        Debug.Log("GameOver is Win : " + isWin);
         StartCoroutine(CoGameEnd());
     }
 
@@ -120,6 +142,7 @@ public class InGameManager : MonoBehaviour
     void PauseGame()
     {
         Debug.Log("PauseGame");
+        isPuaseGame = true;
     }
 
     public void OnResumeGame()
@@ -133,6 +156,7 @@ public class InGameManager : MonoBehaviour
     void ResumeGame()
     {
         Debug.Log("ResumeGame");
+        isPuaseGame = false;
     }
 
     public void OnTimeLimitBegin()
@@ -155,13 +179,19 @@ public class InGameManager : MonoBehaviour
     IEnumerator CoTimeLimitUpdate()
     {
         yield return null;
+        StartCoroutine(uiManager.CoUpdateSliderLimitTime());
+        StartCoroutine(uiManager.CoUpdateTextLeftTime());
+
         while (isTimeLimitUpdating)
         {
             yield return null;
-            leftTime -= Time.deltaTime;
-            if (leftTime <= 0f)
+            if(isPuaseGame == false)
             {
-                OnTimeLimitEnd();
+                leftTime -= Time.deltaTime;
+                if (leftTime <= 0f)
+                {
+                    OnTimeLimitEnd();
+                }
             }
         }
     }
@@ -183,6 +213,7 @@ public class InGameManager : MonoBehaviour
     void TimeLimitEnd()
     {
         Debug.Log("TimeLimitEnd");
+        OnGameEnd(false);
     }    
 
     public void OnReBoot()
@@ -196,6 +227,16 @@ public class InGameManager : MonoBehaviour
     void ReBoot()
     {
         Debug.Log("ReBoot");
+        OnPauseGame();
+        StartCoroutine(CoReBoot());
+    }
+
+    IEnumerator CoReBoot()
+    {
+        yield return null;
+        //리붓 연출
+        yield return StartCoroutine(uiManager.CoUpdateReBoot());
+        OnBalanceAccounts();
     }
 
     public void OnBalanceAccounts()
@@ -209,6 +250,12 @@ public class InGameManager : MonoBehaviour
     void BalanceAccounts()
     {
         Debug.Log("BalanceAccounts");
+        StartCoroutine(CoBalanceAccounts());
+    }
+
+    IEnumerator CoBalanceAccounts()
+    {
+        yield return null;
     }
 
     public void OnEnterStore()
@@ -222,6 +269,13 @@ public class InGameManager : MonoBehaviour
     void EnterStore()
     {
         Debug.Log("EnterStore");
+
+    }
+
+    IEnumerator CoEnterStore()
+    {
+        yield return null;
+        playState = PlayState.Store;
     }
 
     public void OnExitStore()
@@ -235,5 +289,12 @@ public class InGameManager : MonoBehaviour
     void ExitStore()
     {
         Debug.Log("ExitStore");
+        
+    }
+
+    IEnumerator CoExitStore()
+    {
+        yield return null;
+        playState = PlayState.Play;
     }
 }
