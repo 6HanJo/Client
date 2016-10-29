@@ -12,12 +12,8 @@ public class Boss1 : MonoBehaviour {
 	public Sprite Normal;
 	public Sprite Red;
 	SpriteRenderer sR;
-<<<<<<< HEAD
 	bool isNormal = true;
 	int patternCount = 0;
-=======
-	bool isNormal;
->>>>>>> b1b4da6d50ad6312b6a896d395a2b274e7ac5c86
 
 	void Awake()
 	{
@@ -44,7 +40,7 @@ public class Boss1 : MonoBehaviour {
 					bentSpiral [i].BulletAngleRate += 0.0005f;
 				else 
 					bentSpiral [i].BulletAngleRate -= 0.0005f;
-				bentSpiral [i].BulletSpeedRate += 0.005f;
+				bentSpiral [i].BulletSpeedRate += 0.007f;
 			}
 		}
 	}

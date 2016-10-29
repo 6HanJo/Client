@@ -44,11 +44,13 @@ public class PlacedMultipleSpiralShooter : MonoBehaviour {
 					tBullet = tmp.GetComponent<PlacedBullet> ();
 					tmp.transform.position = tr.position;
 					tBullet.speed = shotSpeed;
+					tBullet.InitialSpeed = shotSpeed;
 					tBullet.angle = shotAngle + (float)i / shotCount;
 					tBullet.speedRate = 0;
 					tBullet.angleRate = 0;
 					tBullet.MoveTime = MoveTime;
 					tBullet.StopTime = StopTime;
+					tBullet.Timer = 0;
 				}
 			}
 			yield return new WaitForSeconds (shotDelay);
