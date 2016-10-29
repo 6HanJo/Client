@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class Boss3 : MonoBehaviour {
+	SpriteRenderer sR;
+	public Sprite Normal;
+	public Sprite Red;
 	RandomNwayShooter randNway;
 	OvertakingShooter overTaking;
 	WavingNwayShooter wavingNway;
@@ -16,6 +19,7 @@ public class Boss3 : MonoBehaviour {
 
 	void Awake()
 	{
+		sR = GetComponent<SpriteRenderer> ();
 		patternS = GetComponent<PatternShooter> ();
 		randNway = GetComponent<RandomNwayShooter> ();
 		overTaking = GetComponent<OvertakingShooter> ();
@@ -51,6 +55,15 @@ public class Boss3 : MonoBehaviour {
 
 	IEnumerator TrensformManage() {
 		while (true) {
+			if(!isNormal) {
+				isNormal = true;
+				sR.sprite = Normal;
+				overTaking.canShoot = false;
+				rollingNway.canShoot = false;
+				randomSpreading.canShoot = false;
+				patternS.canShoot = true;
+				patternCount = 0;
+			}
 			if (isNormal && patternCount == 0) {
 				randNway.canShoot = true;
 				placedMulSpiral.canShoot = true;
@@ -61,24 +74,19 @@ public class Boss3 : MonoBehaviour {
 				wavingNway.canShoot = true;
 			} else if (isNormal && patternCount == 2) {
 				isNormal = false;
+				sR.sprite = Red;
 				gap.canShoot = false;
 				wavingNway.canShoot = false;
 				overTaking.canShoot = true;
 				rollingNway.canShoot = true;
 				randomSpreading.canShoot = true;
-			} else {
-				isNormal = true;
-				overTaking.canShoot = false;
-				rollingNway.canShoot = false;
-				randomSpreading.canShoot = false;
-				patternS.canShoot = true;
 			}
 			yield return new WaitForSeconds (15);
 			LevelUp ();
 			++patternCount;
-			if (patternCount >= 4)
-				patternCount = 0;
-			}
 		}
-
+	}
+	void Reset() {
+		patternCount = 0;
+	}
 }

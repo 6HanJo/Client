@@ -12,7 +12,8 @@ public class RandomSpreadingShooter : MonoBehaviour
     private int Timer;
     public bool canShoot = true;
     public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
     static SpawnPool spawnPool = null;
     Transform tmp, tr;
     Bullet tBullet;
@@ -43,6 +44,9 @@ public class RandomSpreadingShooter : MonoBehaviour
                 tBullet.angle = EnemyLib.instance.GetPlayerAngle(transform.position) + ShotAngleRange * (Random.Range(0.0f, 1.0f) - 0.5f);
 				tBullet.speedRate = 0;
 				tBullet.angleRate = 0;
+				tBullet.basicHP = bulletHp;
+				tBullet.hp = bulletHp;
+				tBullet.money = bulletMoney;
             }
         }
         if (canShoot)

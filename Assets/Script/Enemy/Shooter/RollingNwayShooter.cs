@@ -12,7 +12,8 @@ public class RollingNwayShooter : MonoBehaviour {
 	private int Timer;
 	public bool canShoot = true;
 	public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
 	void Update () {
 		if (Timer == 0 && canShoot)
 		{
@@ -21,7 +22,7 @@ public class RollingNwayShooter : MonoBehaviour {
 				EnemyLib.instance.ShootNWay(
 					transform.position,
 					ShotAngle + (float)i / NWayCount, ShotAngleRange, ShotSpeed,
-					ShotCount, 0, 0, bullet);
+					ShotCount, 0, 0, bullet, bulletMoney, bulletHp);
 			}
 
 			ShotAngle += ShotAngleRate;

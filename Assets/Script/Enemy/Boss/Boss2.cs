@@ -38,6 +38,26 @@ public class Boss2 : MonoBehaviour {
 		StartCoroutine (TrensformManage ());
 	}
 
+	IEnumerator ChangeFace() {
+		int count = 0;
+		while (count < 180) {
+			count += 5;
+			transform.rotation = Quaternion.Euler (0, 0, transform.rotation.z + count);
+			yield return null;
+		}
+		transform.rotation = Quaternion.Euler (0, 0, 180);
+	}
+
+	IEnumerator ChangeNormal() {
+		int count = 180;
+		while (count > 0) {
+			count -= 5;
+			transform.rotation = Quaternion.Euler (0, 0, transform.rotation.z - count);
+			yield return null;
+		}
+		transform.rotation = Quaternion.Euler (0, 0, 0);
+	}
+
 	IEnumerator TrensformManage() {
 		while(true)
 		{
@@ -49,12 +69,14 @@ public class Boss2 : MonoBehaviour {
 				overTaking [1].canShoot = true;
 				randomSpreading.canShoot = true;
 			} else if (isNormal && patternCount == 1) {
+				StartCoroutine (ChangeFace ());
 				isNormal = false;
 				overTaking [1].canShoot = false;
 				randomSpreading.canShoot = false;
 				wavingNway.canShoot = true;
 			}
 			else {
+				StartCoroutine (ChangeNormal ());
 				isNormal = true;
 				gap.canShoot = true;
 				overTaking[0].canShoot = true;

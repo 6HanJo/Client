@@ -13,7 +13,8 @@ public class PlacedMultipleSpiralShooter : MonoBehaviour {
 	public int MoveTime;
 	public int StopTime;
 	public GameObject bullet;
-
+	public float bulletMoney;
+	public float bulletHp;
 
 	static SpawnPool spawnPool = null;
 	Transform tmp, tr;
@@ -51,7 +52,9 @@ public class PlacedMultipleSpiralShooter : MonoBehaviour {
 					tBullet.MoveTime = MoveTime;
 					tBullet.StopTime = StopTime;
 					tBullet.Timer = 0;
-					tBullet.gameObject.name = "Boss3_Placed";
+					tBullet.basicHP = bulletHp;
+					tBullet.hp = bulletHp;
+					tBullet.money = bulletMoney;
 				}
 			}
 			yield return new WaitForSeconds (shotDelay);
