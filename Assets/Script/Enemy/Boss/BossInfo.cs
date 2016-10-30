@@ -17,21 +17,12 @@ public class BossInfo : MonoBehaviour
 
     public void HpManager(int num)
     {
-        hp += num;
 		inGameManager.bossHp += num;
 
 		uiManager.SetTextBossHP (inGameManager.bossHp);
 		uiManager.SetMaxSliderBossHP (inGameManager.bossHp);
 
-		if (hp <= 0)
+		if (inGameManager.bossHp  <= 0)
 			this.gameObject.SetActive (false);
 	}
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Bullet_Player"))
-        {
-            HpManager(-1);
-        }
-    }
 }
