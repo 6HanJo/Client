@@ -20,7 +20,7 @@ public class Skill5PlazmaMaker : MonoBehaviour, ISkill
         //UseSkill();
     }
 
-    public void SetSkill(float hp, float length, float reload, float rotSpeed, float waitTime, float standTime)
+    public void SetSkill(int hp, float length, float reload, float rotSpeed, float waitTime, float standTime)
     {
         skillset.damage = hp;
         skillset.distance = length;

@@ -14,7 +14,7 @@ public class Skill1ShoutingOut : MonoBehaviour, ISkill {
         UseSkill();
     }
 
-    public void SetSkill(float damage, float range, float reload, float ShoutDelay)
+    public void SetSkill(int damage, float range, float reload, float ShoutDelay)
     {
         skillset.damage = damage;
         skillset.distance = range;
