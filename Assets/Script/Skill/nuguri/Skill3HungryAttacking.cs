@@ -5,7 +5,8 @@ public class Skill3HungryAttacking : MonoBehaviour, ISkill
 {
 
     public status skillset;
-    public float shotCnt, intervalTime, shotIntervalTime, bulletSpeed;
+    public float intervalTime, shotIntervalTime, bulletSpeed;
+	public int shotCnt; 
 
     public DirectionalShooter[] shots;
 
@@ -15,7 +16,7 @@ public class Skill3HungryAttacking : MonoBehaviour, ISkill
         UseSkill();
     }
 
-    public void SetSkill(float damage, float reload, float bulletCnt, float bulletStandTime, float bulletSpeed, float skillIntervalTime, float shotIntervalTime)
+    public void SetSkill(int damage, float reload, int bulletCnt, float bulletStandTime, float bulletSpeed, float skillIntervalTime, float shotIntervalTime)
     {
         skillset.damage = damage;
         skillset.distance = bulletStandTime;

@@ -17,7 +17,7 @@ public class Skill2GusleMaker : MonoBehaviour, ISkill {
         UseSkill();
     }
 
-    public void SetSkill(float damage, float range, float reload, float movSpeed, float waitTime, float standTime)
+    public void SetSkill(int damage, float range, float reload, float movSpeed, float waitTime, float standTime)
     {
         skillset.damage = damage;
         skillset.distance = range;

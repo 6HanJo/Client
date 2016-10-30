@@ -14,7 +14,8 @@ public class DirectionalShooter : MonoBehaviour {
 	public float bulletHp;
     public bool isPlayer = false, playerShoot = false, skill = false;
 
-    public float bulletDmg, bulletCnt, bulletStandTime;
+    public float bulletStandTime;
+	public int bulletDmg, bulletCnt;
 
     static SpawnPool spawnPool = null;
     Transform tmp, tr;

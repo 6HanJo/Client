@@ -32,8 +32,7 @@ public class Bullet : MonoBehaviour
             sc.SetActives();
 			GameManager.Instance.totalGold += money;
             UIManager.Instance.SetTextTotalGold(GameManager.Instance.totalGold);
-			print (GameManager.Instance.totalGold);
-        }
+		}
         float percent = (hp / basicHP) * 100;
 
         if (percent > 0)

@@ -21,6 +21,7 @@ public class SkillManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+		print (player.name);
         arrSkillInfo[0].skill = player.GetComponent<Skill1ShoutingOut>();
         arrSkillInfo[1].skill = player.GetComponent<Skill2GusleMaker>();
         arrSkillInfo[2].skill = player.GetComponent<Skill3HungryAttacking>();

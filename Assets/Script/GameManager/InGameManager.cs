@@ -47,6 +47,10 @@ public class InGameManager : MonoBehaviour
     public PlayState playState;
 
     public bool isPuaseGame = false;
+	public int bossHp = 0;
+	public int[] arrBossHp;
+
+	public BossInfo bossInfo;
 
     void Start()
     {
@@ -69,6 +73,23 @@ public class InGameManager : MonoBehaviour
 
     void Init()
     {
+		GameManager.Instance.bossType = eBossType.BossC;
+		switch (GameManager.Instance.bossType) {
+		case eBossType.BossA:
+			bossHp = arrBossHp [0];
+			break;
+		case eBossType.BossB:
+			bossHp = arrBossHp[1];
+			break;
+		case eBossType.BossC:
+			bossHp = arrBossHp[2];
+			break;
+		}
+		uiManager.SetMaxSliderBossHP (bossHp);
+
+		bossInfo = GameObject.FindGameObjectWithTag ("Boss").GetComponent<BossInfo>();
+		bossInfo.hp = bossHp;
+
         leftTime = maxTimeLimit;
         uiManager.SetMaxSliderLimitTime(maxTimeLimit);
 

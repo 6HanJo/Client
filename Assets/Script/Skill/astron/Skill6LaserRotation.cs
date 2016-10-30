@@ -25,7 +25,7 @@ public class Skill6LaserRotation : MonoBehaviour, ISkill
         //UseSkill();
     }
 
-    public void SetSkill(float hp, float length, float reload, float movSpeed, float minRot, float maxRot, float waitTime, float standTime, int machineCnt) {
+    public void SetSkill(int hp, float length, float reload, float movSpeed, float minRot, float maxRot, float waitTime, float standTime, int machineCnt) {
         skillset.damage = hp;
         skillset.distance = length;
         skillset.reload = reload;

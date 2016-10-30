@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletPlayer : MonoBehaviour
 {
 
-    public float basicHP, hp;
+    public int basicHP, hp;
     public float angle = 0;
     public float angleRate = 0;
     public float speed = 0;
@@ -19,18 +19,19 @@ public class BulletPlayer : MonoBehaviour
         tr = GetComponent<Transform>();
         sc = GetComponent<SpawnCtrl>();
     }
+
     void OnEnable()
     {
         hp = basicHP;
     }
-    public void HpManager(float num)
+    public void HpManager(int num)
     {
         hp += num;
         if (hp <= 0)
         {
             sc.SetActives();
         }
-        float percent = (hp / basicHP) * 100;
+		float percent = (hp / (float)basicHP) * 100;
         if (percent > 0)
         {
             tr.localScale = new Vector3(1 * percent / 100, 1 * percent / 100, 1);
@@ -46,15 +47,16 @@ public class BulletPlayer : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.tag.Contains("Bullet") && (gameObject.tag != col.tag))
-        {
-            if (col.GetComponent<Bullet>() == null)
-                col.GetComponent<PlacedBullet>().HpManager(-hp);
-            else
-                col.GetComponent<Bullet>().HpManager(-hp);
-            HpManager(-hp);
-        }
-    }
-
+	{
+		if (col.tag.Contains ("Bullet") && (gameObject.tag != col.tag)) {
+			if (col.GetComponent<Bullet> () == null)
+				col.GetComponent<PlacedBullet> ().HpManager (-hp);
+			else
+				col.GetComponent<Bullet> ().HpManager (-hp);
+			HpManager (-hp);
+		} if (col.CompareTag ("Boss")) {
+			col.GetComponent<BossInfo> ().HpManager (-hp);
+			sc.SetActives ();
+		}
+	}
 }
