@@ -252,8 +252,8 @@ public class GameManager : MonoBehaviour {
         Debug.Log("BossType : " + bossType);
         Debug.Log("BossLevel : " + bossLevel);
         Debug.Log("Character Type : " + charType);
-        SceneManager.LoadScene("InGameScene");
-
+        SceneManager.LoadScene(4);
+        /*
         switch (bossType)
         {
             case eBossType.BossA:
@@ -269,6 +269,10 @@ public class GameManager : MonoBehaviour {
             default:
                 break;
         }
+        */
+        SceneManager.LoadScene("InGameScene",LoadSceneMode.Additive);
+
+        
     }
 
     void OnBtnBackToTitleClicked()
