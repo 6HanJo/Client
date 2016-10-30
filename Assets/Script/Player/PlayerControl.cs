@@ -43,10 +43,12 @@ public class PlayerControl : MonoBehaviour
             //4방향 키를 기준을 이동합니다.
             if (Input.GetKey(KeyCode.W))
             {
+                print("1");
                 h = 1;
             }
             else if (Input.GetKey(KeyCode.S))
             {
+                print("-1");
                 h = -1;
             }
             else
