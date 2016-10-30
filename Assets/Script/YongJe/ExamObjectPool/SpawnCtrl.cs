@@ -4,7 +4,13 @@ using PathologicalGames;
 
 public class SpawnCtrl : MonoBehaviour
 {
-    static SpawnPool spawnPool = null;
+    static SpawnCtrl instance;
+    public static SpawnCtrl Instance
+    {
+         get { return instance; }
+    }
+    
+    public static SpawnPool spawnPool = null;
 
     Transform tr;
 

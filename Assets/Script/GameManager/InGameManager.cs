@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PathologicalGames;
 
 public enum PlayState
 {
@@ -257,6 +258,8 @@ public class InGameManager : MonoBehaviour
     {
         yield return null;
         //리붓 연출
+        PoolManager.Pools["Test"].DespawnAll();
+
         
         yield return StartCoroutine(uiManager.CoUIReBoot());
         OnBalanceAccounts();

@@ -63,6 +63,7 @@ public class Table : MonoBehaviour
     public void Buy() {
         ++InGameManager.Instance.skillBuild[skillIndex];
         GameManager.Instance.totalGold -= buyAddition[haveSkills];
+        UIManager.Instance.SetTextTotalGold(GameManager.Instance.totalGold);
         SkillSelect(skillIndex);
     }
 

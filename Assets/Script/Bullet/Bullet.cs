@@ -51,6 +51,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+
         rad = angle * Mathf.PI * 2;
         tr.position += new Vector3((speed * Mathf.Cos(rad) * Time.deltaTime ), (speed * Mathf.Sin(rad) * Time.deltaTime), 0);
         angle += angleRate;
