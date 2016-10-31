@@ -72,6 +72,8 @@ public class DirectionalShooter : MonoBehaviour {
         tmp = spawnPool.Spawn(bullet, PlayerControl.instance.bulletPos.localPosition, Quaternion.identity);
         pBullet = tmp.GetComponent<BulletPlayer>();
         tmp.transform.position = PlayerControl.instance.bulletPos.position;
+		pBullet.hp = bulletHp;
+		pBullet.basicHP = bulletHp;
         pBullet.speed = shotSpeed;
         pBullet.angle = angle;
         yield return new WaitForSeconds(shotDelay);
